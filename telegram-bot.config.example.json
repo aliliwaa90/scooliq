@@ -1,0 +1,6 @@
+{
+  "token": "1234567890:YOUR_BOT_TOKEN",
+  "miniAppUrl": "https://your-domain.example.com",
+  "welcomeText": "اهلا بك في البوت. اضغط الزر بالاسفل لفتح المنصة.",
+  "helpText": "استخدم /start لعرض رسالة الترحيب من جديد."
+}

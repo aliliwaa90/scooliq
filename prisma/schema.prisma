@@ -1,0 +1,136 @@
+generator client {
+  provider   = "prisma-client"
+  output     = "../src/generated/prisma"
+  engineType = "client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id
+  firstName String
+  lastName  String
+  username  String   @unique
+  avatar    String
+  stage     String
+  grade     String
+  province  String
+  role      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Grade {
+  id       String    @id
+  name     String
+  stage    String
+  order    Int
+  subjects Subject[]
+  videos   Video[]
+  handouts Handout[]
+  quizzes  Quiz[]
+}
+
+model Subject {
+  id           String    @id
+  name         String
+  icon         String
+  color        String
+  gradeId      String
+  description  String
+  videoCount   Int
+  handoutCount Int
+  bookCount    Int
+  quizCount    Int
+  grade        Grade     @relation(fields: [gradeId], references: [id], onDelete: Cascade)
+  videos       Video[]
+  handouts     Handout[]
+  quizzes      Quiz[]
+}
+
+model Video {
+  id          String   @id
+  title       String
+  description String
+  thumbnail   String
+  url         String
+  teacher     String
+  duration    String
+  views       Int
+  subjectId   String
+  gradeId     String
+  chapter     String
+  lesson      String
+  isFree      Boolean
+  isActive    Boolean
+  createdAt   DateTime
+  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  grade       Grade    @relation(fields: [gradeId], references: [id], onDelete: Cascade)
+
+  @@index([subjectId])
+  @@index([gradeId])
+  @@index([createdAt])
+}
+
+model Handout {
+  id        String   @id
+  title     String
+  cover     String
+  fileUrl   String
+  fileSize  String
+  type      String
+  downloads Int
+  subjectId String
+  gradeId   String
+  isFree    Boolean
+  isActive  Boolean
+  createdAt DateTime
+  subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  grade     Grade    @relation(fields: [gradeId], references: [id], onDelete: Cascade)
+
+  @@index([subjectId])
+  @@index([gradeId])
+  @@index([createdAt])
+}
+
+model Quiz {
+  id            String   @id
+  title         String
+  subjectId     String
+  gradeId       String
+  chapter       String
+  duration      Int
+  questionCount Int
+  attempts      Int
+  questions     Json
+  isActive      Boolean
+  createdAt     DateTime
+  subject       Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  grade         Grade    @relation(fields: [gradeId], references: [id], onDelete: Cascade)
+
+  @@index([subjectId])
+  @@index([gradeId])
+  @@index([createdAt])
+}
+
+model Teacher {
+  id         String @id
+  name       String
+  avatar     String
+  subject    String
+  bio        String
+  videoCount Int
+}
+
+model Notification {
+  id        String   @id
+  title     String
+  message   String
+  type      String
+  createdAt DateTime
+  isRead    Boolean  @default(false)
+
+  @@index([createdAt])
+}
