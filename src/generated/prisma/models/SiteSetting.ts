@@ -270,7 +270,6 @@ export type SiteSettingUncheckedCreateInput = {
 }
 
 export type SiteSettingUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   siteName?: Prisma.StringFieldUpdateOperationsInput | string
   siteDescription?: Prisma.StringFieldUpdateOperationsInput | string
   telegramHandle?: Prisma.StringFieldUpdateOperationsInput | string
@@ -280,7 +279,6 @@ export type SiteSettingUpdateInput = {
 }
 
 export type SiteSettingUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   siteName?: Prisma.StringFieldUpdateOperationsInput | string
   siteDescription?: Prisma.StringFieldUpdateOperationsInput | string
   telegramHandle?: Prisma.StringFieldUpdateOperationsInput | string
@@ -300,7 +298,6 @@ export type SiteSettingCreateManyInput = {
 }
 
 export type SiteSettingUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   siteName?: Prisma.StringFieldUpdateOperationsInput | string
   siteDescription?: Prisma.StringFieldUpdateOperationsInput | string
   telegramHandle?: Prisma.StringFieldUpdateOperationsInput | string
@@ -310,7 +307,6 @@ export type SiteSettingUpdateManyMutationInput = {
 }
 
 export type SiteSettingUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   siteName?: Prisma.StringFieldUpdateOperationsInput | string
   siteDescription?: Prisma.StringFieldUpdateOperationsInput | string
   telegramHandle?: Prisma.StringFieldUpdateOperationsInput | string
@@ -361,25 +357,7 @@ export type SiteSettingSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   updatedAt?: boolean
 }, ExtArgs["result"]["siteSetting"]>
 
-export type SiteSettingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  siteName?: boolean
-  siteDescription?: boolean
-  telegramHandle?: boolean
-  maintenanceMode?: boolean
-  allowRegistration?: boolean
-  updatedAt?: boolean
-}, ExtArgs["result"]["siteSetting"]>
 
-export type SiteSettingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  siteName?: boolean
-  siteDescription?: boolean
-  telegramHandle?: boolean
-  maintenanceMode?: boolean
-  allowRegistration?: boolean
-  updatedAt?: boolean
-}, ExtArgs["result"]["siteSetting"]>
 
 export type SiteSettingSelectScalar = {
   id?: boolean
@@ -522,30 +500,6 @@ export interface SiteSettingDelegate<ExtArgs extends runtime.Types.Extensions.In
   createMany<T extends SiteSettingCreateManyArgs>(args?: Prisma.SelectSubset<T, SiteSettingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many SiteSettings and returns the data saved in the database.
-   * @param {SiteSettingCreateManyAndReturnArgs} args - Arguments to create many SiteSettings.
-   * @example
-   * // Create many SiteSettings
-   * const siteSetting = await prisma.siteSetting.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many SiteSettings and only return the `id`
-   * const siteSettingWithIdOnly = await prisma.siteSetting.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends SiteSettingCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, SiteSettingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteSettingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a SiteSetting.
    * @param {SiteSettingDeleteArgs} args - Arguments to delete one SiteSetting.
    * @example
@@ -610,36 +564,6 @@ export interface SiteSettingDelegate<ExtArgs extends runtime.Types.Extensions.In
   updateMany<T extends SiteSettingUpdateManyArgs>(args: Prisma.SelectSubset<T, SiteSettingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more SiteSettings and returns the data updated in the database.
-   * @param {SiteSettingUpdateManyAndReturnArgs} args - Arguments to update many SiteSettings.
-   * @example
-   * // Update many SiteSettings
-   * const siteSetting = await prisma.siteSetting.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more SiteSettings and only return the `id`
-   * const siteSettingWithIdOnly = await prisma.siteSetting.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends SiteSettingUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, SiteSettingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteSettingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Create or update one SiteSetting.
    * @param {SiteSettingUpsertArgs} args - Arguments to update or create a SiteSetting.
    * @example
@@ -657,6 +581,29 @@ export interface SiteSettingDelegate<ExtArgs extends runtime.Types.Extensions.In
    * })
    */
   upsert<T extends SiteSettingUpsertArgs>(args: Prisma.SelectSubset<T, SiteSettingUpsertArgs<ExtArgs>>): Prisma.Prisma__SiteSettingClient<runtime.Types.Result.GetResult<Prisma.$SiteSettingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+  /**
+   * Find zero or more SiteSettings that matches the filter.
+   * @param {SiteSettingFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const siteSetting = await prisma.siteSetting.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(args?: Prisma.SiteSettingFindRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a SiteSetting.
+   * @param {SiteSettingAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const siteSetting = await prisma.siteSetting.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(args?: Prisma.SiteSettingAggregateRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
 
 
   /**
@@ -1039,26 +986,6 @@ export type SiteSettingCreateManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * The data used to create many SiteSettings.
    */
   data: Prisma.SiteSettingCreateManyInput | Prisma.SiteSettingCreateManyInput[]
-  skipDuplicates?: boolean
-}
-
-/**
- * SiteSetting createManyAndReturn
- */
-export type SiteSettingCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the SiteSetting
-   */
-  select?: Prisma.SiteSettingSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the SiteSetting
-   */
-  omit?: Prisma.SiteSettingOmit<ExtArgs> | null
-  /**
-   * The data used to create many SiteSettings.
-   */
-  data: Prisma.SiteSettingCreateManyInput | Prisma.SiteSettingCreateManyInput[]
-  skipDuplicates?: boolean
 }
 
 /**
@@ -1087,32 +1014,6 @@ export type SiteSettingUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inter
  * SiteSetting updateMany
  */
 export type SiteSettingUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * The data used to update SiteSettings.
-   */
-  data: Prisma.XOR<Prisma.SiteSettingUpdateManyMutationInput, Prisma.SiteSettingUncheckedUpdateManyInput>
-  /**
-   * Filter which SiteSettings to update
-   */
-  where?: Prisma.SiteSettingWhereInput
-  /**
-   * Limit how many SiteSettings to update.
-   */
-  limit?: number
-}
-
-/**
- * SiteSetting updateManyAndReturn
- */
-export type SiteSettingUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the SiteSetting
-   */
-  select?: Prisma.SiteSettingSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the SiteSetting
-   */
-  omit?: Prisma.SiteSettingOmit<ExtArgs> | null
   /**
    * The data used to update SiteSettings.
    */
@@ -1183,6 +1084,34 @@ export type SiteSettingDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many SiteSettings to delete.
    */
   limit?: number
+}
+
+/**
+ * SiteSetting findRaw
+ */
+export type SiteSettingFindRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * SiteSetting aggregateRaw
+ */
+export type SiteSettingAggregateRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**

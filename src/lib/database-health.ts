@@ -6,7 +6,7 @@ export async function isDatabaseReachable() {
   }
 
   try {
-    await prisma.$queryRaw`SELECT 1`;
+    await prisma.user.count();
     return true;
   } catch (error) {
     console.error('Database connectivity check failed.', error);

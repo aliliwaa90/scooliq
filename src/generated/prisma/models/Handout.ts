@@ -382,7 +382,6 @@ export type HandoutUncheckedCreateInput = {
 }
 
 export type HandoutUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cover?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -397,7 +396,6 @@ export type HandoutUpdateInput = {
 }
 
 export type HandoutUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cover?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -427,7 +425,6 @@ export type HandoutCreateManyInput = {
 }
 
 export type HandoutUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cover?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -440,7 +437,6 @@ export type HandoutUpdateManyMutationInput = {
 }
 
 export type HandoutUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cover?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -636,7 +632,6 @@ export type HandoutCreateOrConnectWithoutGradeInput = {
 
 export type HandoutCreateManyGradeInputEnvelope = {
   data: Prisma.HandoutCreateManyGradeInput | Prisma.HandoutCreateManyGradeInput[]
-  skipDuplicates?: boolean
 }
 
 export type HandoutUpsertWithWhereUniqueWithoutGradeInput = {
@@ -708,7 +703,6 @@ export type HandoutCreateOrConnectWithoutSubjectInput = {
 
 export type HandoutCreateManySubjectInputEnvelope = {
   data: Prisma.HandoutCreateManySubjectInput | Prisma.HandoutCreateManySubjectInput[]
-  skipDuplicates?: boolean
 }
 
 export type HandoutUpsertWithWhereUniqueWithoutSubjectInput = {
@@ -742,7 +736,6 @@ export type HandoutCreateManyGradeInput = {
 }
 
 export type HandoutUpdateWithoutGradeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cover?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -756,7 +749,6 @@ export type HandoutUpdateWithoutGradeInput = {
 }
 
 export type HandoutUncheckedUpdateWithoutGradeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cover?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -770,7 +762,6 @@ export type HandoutUncheckedUpdateWithoutGradeInput = {
 }
 
 export type HandoutUncheckedUpdateManyWithoutGradeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cover?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -798,7 +789,6 @@ export type HandoutCreateManySubjectInput = {
 }
 
 export type HandoutUpdateWithoutSubjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cover?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -812,7 +802,6 @@ export type HandoutUpdateWithoutSubjectInput = {
 }
 
 export type HandoutUncheckedUpdateWithoutSubjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cover?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -826,7 +815,6 @@ export type HandoutUncheckedUpdateWithoutSubjectInput = {
 }
 
 export type HandoutUncheckedUpdateManyWithoutSubjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   cover?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
@@ -858,39 +846,7 @@ export type HandoutSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["handout"]>
 
-export type HandoutSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  title?: boolean
-  cover?: boolean
-  fileUrl?: boolean
-  fileSize?: boolean
-  type?: boolean
-  downloads?: boolean
-  subjectId?: boolean
-  gradeId?: boolean
-  isFree?: boolean
-  isActive?: boolean
-  createdAt?: boolean
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["handout"]>
 
-export type HandoutSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  title?: boolean
-  cover?: boolean
-  fileUrl?: boolean
-  fileSize?: boolean
-  type?: boolean
-  downloads?: boolean
-  subjectId?: boolean
-  gradeId?: boolean
-  isFree?: boolean
-  isActive?: boolean
-  createdAt?: boolean
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["handout"]>
 
 export type HandoutSelectScalar = {
   id?: boolean
@@ -909,14 +865,6 @@ export type HandoutSelectScalar = {
 
 export type HandoutOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "cover" | "fileUrl" | "fileSize" | "type" | "downloads" | "subjectId" | "gradeId" | "isFree" | "isActive" | "createdAt", ExtArgs["result"]["handout"]>
 export type HandoutInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}
-export type HandoutIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}
-export type HandoutIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
   grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
 }
@@ -1058,30 +1006,6 @@ export interface HandoutDelegate<ExtArgs extends runtime.Types.Extensions.Intern
   createMany<T extends HandoutCreateManyArgs>(args?: Prisma.SelectSubset<T, HandoutCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many Handouts and returns the data saved in the database.
-   * @param {HandoutCreateManyAndReturnArgs} args - Arguments to create many Handouts.
-   * @example
-   * // Create many Handouts
-   * const handout = await prisma.handout.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many Handouts and only return the `id`
-   * const handoutWithIdOnly = await prisma.handout.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends HandoutCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, HandoutCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HandoutPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a Handout.
    * @param {HandoutDeleteArgs} args - Arguments to delete one Handout.
    * @example
@@ -1146,36 +1070,6 @@ export interface HandoutDelegate<ExtArgs extends runtime.Types.Extensions.Intern
   updateMany<T extends HandoutUpdateManyArgs>(args: Prisma.SelectSubset<T, HandoutUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more Handouts and returns the data updated in the database.
-   * @param {HandoutUpdateManyAndReturnArgs} args - Arguments to update many Handouts.
-   * @example
-   * // Update many Handouts
-   * const handout = await prisma.handout.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more Handouts and only return the `id`
-   * const handoutWithIdOnly = await prisma.handout.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends HandoutUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, HandoutUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HandoutPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Create or update one Handout.
    * @param {HandoutUpsertArgs} args - Arguments to update or create a Handout.
    * @example
@@ -1193,6 +1087,29 @@ export interface HandoutDelegate<ExtArgs extends runtime.Types.Extensions.Intern
    * })
    */
   upsert<T extends HandoutUpsertArgs>(args: Prisma.SelectSubset<T, HandoutUpsertArgs<ExtArgs>>): Prisma.Prisma__HandoutClient<runtime.Types.Result.GetResult<Prisma.$HandoutPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+  /**
+   * Find zero or more Handouts that matches the filter.
+   * @param {HandoutFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const handout = await prisma.handout.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(args?: Prisma.HandoutFindRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a Handout.
+   * @param {HandoutAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const handout = await prisma.handout.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(args?: Prisma.HandoutAggregateRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
 
 
   /**
@@ -1606,30 +1523,6 @@ export type HandoutCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * The data used to create many Handouts.
    */
   data: Prisma.HandoutCreateManyInput | Prisma.HandoutCreateManyInput[]
-  skipDuplicates?: boolean
-}
-
-/**
- * Handout createManyAndReturn
- */
-export type HandoutCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Handout
-   */
-  select?: Prisma.HandoutSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Handout
-   */
-  omit?: Prisma.HandoutOmit<ExtArgs> | null
-  /**
-   * The data used to create many Handouts.
-   */
-  data: Prisma.HandoutCreateManyInput | Prisma.HandoutCreateManyInput[]
-  skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.HandoutIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1674,36 +1567,6 @@ export type HandoutUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Handouts to update.
    */
   limit?: number
-}
-
-/**
- * Handout updateManyAndReturn
- */
-export type HandoutUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Handout
-   */
-  select?: Prisma.HandoutSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Handout
-   */
-  omit?: Prisma.HandoutOmit<ExtArgs> | null
-  /**
-   * The data used to update Handouts.
-   */
-  data: Prisma.XOR<Prisma.HandoutUpdateManyMutationInput, Prisma.HandoutUncheckedUpdateManyInput>
-  /**
-   * Filter which Handouts to update
-   */
-  where?: Prisma.HandoutWhereInput
-  /**
-   * Limit how many Handouts to update.
-   */
-  limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.HandoutIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1770,6 +1633,34 @@ export type HandoutDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Handouts to delete.
    */
   limit?: number
+}
+
+/**
+ * Handout findRaw
+ */
+export type HandoutFindRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * Handout aggregateRaw
+ */
+export type HandoutAggregateRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**

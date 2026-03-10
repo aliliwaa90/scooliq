@@ -350,7 +350,7 @@ export type QuizCreateInput = {
   duration: number
   questionCount?: number
   attempts?: number
-  questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions: runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
   subject: Prisma.SubjectCreateNestedOneWithoutQuizzesInput
@@ -366,19 +366,18 @@ export type QuizUncheckedCreateInput = {
   duration: number
   questionCount?: number
   attempts?: number
-  questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions: runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
 }
 
 export type QuizUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   chapter?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   questionCount?: Prisma.IntFieldUpdateOperationsInput | number
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  questions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions?: runtime.InputJsonValue | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.SubjectUpdateOneRequiredWithoutQuizzesNestedInput
@@ -386,7 +385,6 @@ export type QuizUpdateInput = {
 }
 
 export type QuizUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   gradeId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -394,7 +392,7 @@ export type QuizUncheckedUpdateInput = {
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   questionCount?: Prisma.IntFieldUpdateOperationsInput | number
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  questions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions?: runtime.InputJsonValue | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -408,25 +406,23 @@ export type QuizCreateManyInput = {
   duration: number
   questionCount?: number
   attempts?: number
-  questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions: runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
 }
 
 export type QuizUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   chapter?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   questionCount?: Prisma.IntFieldUpdateOperationsInput | number
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  questions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions?: runtime.InputJsonValue | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type QuizUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   gradeId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -434,7 +430,7 @@ export type QuizUncheckedUpdateManyInput = {
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   questionCount?: Prisma.IntFieldUpdateOperationsInput | number
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  questions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions?: runtime.InputJsonValue | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -592,7 +588,7 @@ export type QuizCreateWithoutGradeInput = {
   duration: number
   questionCount?: number
   attempts?: number
-  questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions: runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
   subject: Prisma.SubjectCreateNestedOneWithoutQuizzesInput
@@ -606,7 +602,7 @@ export type QuizUncheckedCreateWithoutGradeInput = {
   duration: number
   questionCount?: number
   attempts?: number
-  questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions: runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
 }
@@ -618,7 +614,6 @@ export type QuizCreateOrConnectWithoutGradeInput = {
 
 export type QuizCreateManyGradeInputEnvelope = {
   data: Prisma.QuizCreateManyGradeInput | Prisma.QuizCreateManyGradeInput[]
-  skipDuplicates?: boolean
 }
 
 export type QuizUpsertWithWhereUniqueWithoutGradeInput = {
@@ -661,7 +656,7 @@ export type QuizCreateWithoutSubjectInput = {
   duration: number
   questionCount?: number
   attempts?: number
-  questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions: runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
   grade: Prisma.GradeCreateNestedOneWithoutQuizzesInput
@@ -675,7 +670,7 @@ export type QuizUncheckedCreateWithoutSubjectInput = {
   duration: number
   questionCount?: number
   attempts?: number
-  questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions: runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
 }
@@ -687,7 +682,6 @@ export type QuizCreateOrConnectWithoutSubjectInput = {
 
 export type QuizCreateManySubjectInputEnvelope = {
   data: Prisma.QuizCreateManySubjectInput | Prisma.QuizCreateManySubjectInput[]
-  skipDuplicates?: boolean
 }
 
 export type QuizUpsertWithWhereUniqueWithoutSubjectInput = {
@@ -714,46 +708,43 @@ export type QuizCreateManyGradeInput = {
   duration: number
   questionCount?: number
   attempts?: number
-  questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions: runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
 }
 
 export type QuizUpdateWithoutGradeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   chapter?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   questionCount?: Prisma.IntFieldUpdateOperationsInput | number
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  questions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions?: runtime.InputJsonValue | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subject?: Prisma.SubjectUpdateOneRequiredWithoutQuizzesNestedInput
 }
 
 export type QuizUncheckedUpdateWithoutGradeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   chapter?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   questionCount?: Prisma.IntFieldUpdateOperationsInput | number
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  questions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions?: runtime.InputJsonValue | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type QuizUncheckedUpdateManyWithoutGradeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   chapter?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   questionCount?: Prisma.IntFieldUpdateOperationsInput | number
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  questions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions?: runtime.InputJsonValue | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -766,46 +757,43 @@ export type QuizCreateManySubjectInput = {
   duration: number
   questionCount?: number
   attempts?: number
-  questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions: runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
 }
 
 export type QuizUpdateWithoutSubjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   chapter?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   questionCount?: Prisma.IntFieldUpdateOperationsInput | number
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  questions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions?: runtime.InputJsonValue | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   grade?: Prisma.GradeUpdateOneRequiredWithoutQuizzesNestedInput
 }
 
 export type QuizUncheckedUpdateWithoutSubjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   gradeId?: Prisma.StringFieldUpdateOperationsInput | string
   chapter?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   questionCount?: Prisma.IntFieldUpdateOperationsInput | number
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  questions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions?: runtime.InputJsonValue | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type QuizUncheckedUpdateManyWithoutSubjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   gradeId?: Prisma.StringFieldUpdateOperationsInput | string
   chapter?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.IntFieldUpdateOperationsInput | number
   questionCount?: Prisma.IntFieldUpdateOperationsInput | number
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  questions?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  questions?: runtime.InputJsonValue | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -828,37 +816,7 @@ export type QuizSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["quiz"]>
 
-export type QuizSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  title?: boolean
-  subjectId?: boolean
-  gradeId?: boolean
-  chapter?: boolean
-  duration?: boolean
-  questionCount?: boolean
-  attempts?: boolean
-  questions?: boolean
-  isActive?: boolean
-  createdAt?: boolean
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["quiz"]>
 
-export type QuizSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  title?: boolean
-  subjectId?: boolean
-  gradeId?: boolean
-  chapter?: boolean
-  duration?: boolean
-  questionCount?: boolean
-  attempts?: boolean
-  questions?: boolean
-  isActive?: boolean
-  createdAt?: boolean
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["quiz"]>
 
 export type QuizSelectScalar = {
   id?: boolean
@@ -876,14 +834,6 @@ export type QuizSelectScalar = {
 
 export type QuizOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "subjectId" | "gradeId" | "chapter" | "duration" | "questionCount" | "attempts" | "questions" | "isActive" | "createdAt", ExtArgs["result"]["quiz"]>
 export type QuizInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}
-export type QuizIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}
-export type QuizIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
   grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
 }
@@ -1024,30 +974,6 @@ export interface QuizDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
   createMany<T extends QuizCreateManyArgs>(args?: Prisma.SelectSubset<T, QuizCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many Quizzes and returns the data saved in the database.
-   * @param {QuizCreateManyAndReturnArgs} args - Arguments to create many Quizzes.
-   * @example
-   * // Create many Quizzes
-   * const quiz = await prisma.quiz.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many Quizzes and only return the `id`
-   * const quizWithIdOnly = await prisma.quiz.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends QuizCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, QuizCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuizPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a Quiz.
    * @param {QuizDeleteArgs} args - Arguments to delete one Quiz.
    * @example
@@ -1112,36 +1038,6 @@ export interface QuizDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
   updateMany<T extends QuizUpdateManyArgs>(args: Prisma.SelectSubset<T, QuizUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more Quizzes and returns the data updated in the database.
-   * @param {QuizUpdateManyAndReturnArgs} args - Arguments to update many Quizzes.
-   * @example
-   * // Update many Quizzes
-   * const quiz = await prisma.quiz.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more Quizzes and only return the `id`
-   * const quizWithIdOnly = await prisma.quiz.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends QuizUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, QuizUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuizPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Create or update one Quiz.
    * @param {QuizUpsertArgs} args - Arguments to update or create a Quiz.
    * @example
@@ -1159,6 +1055,29 @@ export interface QuizDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    * })
    */
   upsert<T extends QuizUpsertArgs>(args: Prisma.SelectSubset<T, QuizUpsertArgs<ExtArgs>>): Prisma.Prisma__QuizClient<runtime.Types.Result.GetResult<Prisma.$QuizPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+  /**
+   * Find zero or more Quizzes that matches the filter.
+   * @param {QuizFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const quiz = await prisma.quiz.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(args?: Prisma.QuizFindRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a Quiz.
+   * @param {QuizAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const quiz = await prisma.quiz.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(args?: Prisma.QuizAggregateRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
 
 
   /**
@@ -1571,30 +1490,6 @@ export type QuizCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * The data used to create many Quizzes.
    */
   data: Prisma.QuizCreateManyInput | Prisma.QuizCreateManyInput[]
-  skipDuplicates?: boolean
-}
-
-/**
- * Quiz createManyAndReturn
- */
-export type QuizCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Quiz
-   */
-  select?: Prisma.QuizSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Quiz
-   */
-  omit?: Prisma.QuizOmit<ExtArgs> | null
-  /**
-   * The data used to create many Quizzes.
-   */
-  data: Prisma.QuizCreateManyInput | Prisma.QuizCreateManyInput[]
-  skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.QuizIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1639,36 +1534,6 @@ export type QuizUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Quizzes to update.
    */
   limit?: number
-}
-
-/**
- * Quiz updateManyAndReturn
- */
-export type QuizUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Quiz
-   */
-  select?: Prisma.QuizSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Quiz
-   */
-  omit?: Prisma.QuizOmit<ExtArgs> | null
-  /**
-   * The data used to update Quizzes.
-   */
-  data: Prisma.XOR<Prisma.QuizUpdateManyMutationInput, Prisma.QuizUncheckedUpdateManyInput>
-  /**
-   * Filter which Quizzes to update
-   */
-  where?: Prisma.QuizWhereInput
-  /**
-   * Limit how many Quizzes to update.
-   */
-  limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.QuizIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1735,6 +1600,34 @@ export type QuizDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Quizzes to delete.
    */
   limit?: number
+}
+
+/**
+ * Quiz findRaw
+ */
+export type QuizFindRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * Quiz aggregateRaw
+ */
+export type QuizAggregateRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**

@@ -245,7 +245,6 @@ export type AdminSessionUncheckedCreateInput = {
 }
 
 export type AdminSessionUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -253,7 +252,6 @@ export type AdminSessionUpdateInput = {
 }
 
 export type AdminSessionUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -269,14 +267,12 @@ export type AdminSessionCreateManyInput = {
 }
 
 export type AdminSessionUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AdminSessionUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -380,7 +376,6 @@ export type AdminSessionCreateOrConnectWithoutUserInput = {
 
 export type AdminSessionCreateManyUserInputEnvelope = {
   data: Prisma.AdminSessionCreateManyUserInput | Prisma.AdminSessionCreateManyUserInput[]
-  skipDuplicates?: boolean
 }
 
 export type AdminSessionUpsertWithWhereUniqueWithoutUserInput = {
@@ -418,21 +413,18 @@ export type AdminSessionCreateManyUserInput = {
 }
 
 export type AdminSessionUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AdminSessionUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AdminSessionUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -449,23 +441,7 @@ export type AdminSessionSelect<ExtArgs extends runtime.Types.Extensions.Internal
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["adminSession"]>
 
-export type AdminSessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  tokenHash?: boolean
-  userId?: boolean
-  expiresAt?: boolean
-  createdAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["adminSession"]>
 
-export type AdminSessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  tokenHash?: boolean
-  userId?: boolean
-  expiresAt?: boolean
-  createdAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["adminSession"]>
 
 export type AdminSessionSelectScalar = {
   id?: boolean
@@ -477,12 +453,6 @@ export type AdminSessionSelectScalar = {
 
 export type AdminSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tokenHash" | "userId" | "expiresAt" | "createdAt", ExtArgs["result"]["adminSession"]>
 export type AdminSessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-}
-export type AdminSessionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-}
-export type AdminSessionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
@@ -615,30 +585,6 @@ export interface AdminSessionDelegate<ExtArgs extends runtime.Types.Extensions.I
   createMany<T extends AdminSessionCreateManyArgs>(args?: Prisma.SelectSubset<T, AdminSessionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many AdminSessions and returns the data saved in the database.
-   * @param {AdminSessionCreateManyAndReturnArgs} args - Arguments to create many AdminSessions.
-   * @example
-   * // Create many AdminSessions
-   * const adminSession = await prisma.adminSession.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many AdminSessions and only return the `id`
-   * const adminSessionWithIdOnly = await prisma.adminSession.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends AdminSessionCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, AdminSessionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a AdminSession.
    * @param {AdminSessionDeleteArgs} args - Arguments to delete one AdminSession.
    * @example
@@ -703,36 +649,6 @@ export interface AdminSessionDelegate<ExtArgs extends runtime.Types.Extensions.I
   updateMany<T extends AdminSessionUpdateManyArgs>(args: Prisma.SelectSubset<T, AdminSessionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more AdminSessions and returns the data updated in the database.
-   * @param {AdminSessionUpdateManyAndReturnArgs} args - Arguments to update many AdminSessions.
-   * @example
-   * // Update many AdminSessions
-   * const adminSession = await prisma.adminSession.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more AdminSessions and only return the `id`
-   * const adminSessionWithIdOnly = await prisma.adminSession.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends AdminSessionUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, AdminSessionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Create or update one AdminSession.
    * @param {AdminSessionUpsertArgs} args - Arguments to update or create a AdminSession.
    * @example
@@ -750,6 +666,29 @@ export interface AdminSessionDelegate<ExtArgs extends runtime.Types.Extensions.I
    * })
    */
   upsert<T extends AdminSessionUpsertArgs>(args: Prisma.SelectSubset<T, AdminSessionUpsertArgs<ExtArgs>>): Prisma.Prisma__AdminSessionClient<runtime.Types.Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+  /**
+   * Find zero or more AdminSessions that matches the filter.
+   * @param {AdminSessionFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const adminSession = await prisma.adminSession.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(args?: Prisma.AdminSessionFindRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a AdminSession.
+   * @param {AdminSessionAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const adminSession = await prisma.adminSession.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(args?: Prisma.AdminSessionAggregateRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
 
 
   /**
@@ -1155,30 +1094,6 @@ export type AdminSessionCreateManyArgs<ExtArgs extends runtime.Types.Extensions.
    * The data used to create many AdminSessions.
    */
   data: Prisma.AdminSessionCreateManyInput | Prisma.AdminSessionCreateManyInput[]
-  skipDuplicates?: boolean
-}
-
-/**
- * AdminSession createManyAndReturn
- */
-export type AdminSessionCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AdminSession
-   */
-  select?: Prisma.AdminSessionSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the AdminSession
-   */
-  omit?: Prisma.AdminSessionOmit<ExtArgs> | null
-  /**
-   * The data used to create many AdminSessions.
-   */
-  data: Prisma.AdminSessionCreateManyInput | Prisma.AdminSessionCreateManyInput[]
-  skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AdminSessionIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1223,36 +1138,6 @@ export type AdminSessionUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many AdminSessions to update.
    */
   limit?: number
-}
-
-/**
- * AdminSession updateManyAndReturn
- */
-export type AdminSessionUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AdminSession
-   */
-  select?: Prisma.AdminSessionSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the AdminSession
-   */
-  omit?: Prisma.AdminSessionOmit<ExtArgs> | null
-  /**
-   * The data used to update AdminSessions.
-   */
-  data: Prisma.XOR<Prisma.AdminSessionUpdateManyMutationInput, Prisma.AdminSessionUncheckedUpdateManyInput>
-  /**
-   * Filter which AdminSessions to update
-   */
-  where?: Prisma.AdminSessionWhereInput
-  /**
-   * Limit how many AdminSessions to update.
-   */
-  limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AdminSessionIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1319,6 +1204,34 @@ export type AdminSessionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many AdminSessions to delete.
    */
   limit?: number
+}
+
+/**
+ * AdminSession findRaw
+ */
+export type AdminSessionFindRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * AdminSession aggregateRaw
+ */
+export type AdminSessionAggregateRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**

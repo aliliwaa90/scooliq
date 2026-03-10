@@ -284,7 +284,6 @@ export type GradeUncheckedCreateInput = {
 }
 
 export type GradeUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -295,7 +294,6 @@ export type GradeUpdateInput = {
 }
 
 export type GradeUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -313,14 +311,12 @@ export type GradeCreateManyInput = {
 }
 
 export type GradeUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type GradeUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -461,7 +457,6 @@ export type GradeUpdateToOneWithWhereWithoutSubjectsInput = {
 }
 
 export type GradeUpdateWithoutSubjectsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -471,7 +466,6 @@ export type GradeUpdateWithoutSubjectsInput = {
 }
 
 export type GradeUncheckedUpdateWithoutSubjectsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -517,7 +511,6 @@ export type GradeUpdateToOneWithWhereWithoutVideosInput = {
 }
 
 export type GradeUpdateWithoutVideosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -527,7 +520,6 @@ export type GradeUpdateWithoutVideosInput = {
 }
 
 export type GradeUncheckedUpdateWithoutVideosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -573,7 +565,6 @@ export type GradeUpdateToOneWithWhereWithoutHandoutsInput = {
 }
 
 export type GradeUpdateWithoutHandoutsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -583,7 +574,6 @@ export type GradeUpdateWithoutHandoutsInput = {
 }
 
 export type GradeUncheckedUpdateWithoutHandoutsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -629,7 +619,6 @@ export type GradeUpdateToOneWithWhereWithoutQuizzesInput = {
 }
 
 export type GradeUpdateWithoutQuizzesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -639,7 +628,6 @@ export type GradeUpdateWithoutQuizzesInput = {
 }
 
 export type GradeUncheckedUpdateWithoutQuizzesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
@@ -718,19 +706,7 @@ export type GradeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   _count?: boolean | Prisma.GradeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["grade"]>
 
-export type GradeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  name?: boolean
-  stage?: boolean
-  order?: boolean
-}, ExtArgs["result"]["grade"]>
 
-export type GradeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  name?: boolean
-  stage?: boolean
-  order?: boolean
-}, ExtArgs["result"]["grade"]>
 
 export type GradeSelectScalar = {
   id?: boolean
@@ -747,8 +723,6 @@ export type GradeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   quizzes?: boolean | Prisma.Grade$quizzesArgs<ExtArgs>
   _count?: boolean | Prisma.GradeCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type GradeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type GradeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $GradePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Grade"
@@ -881,30 +855,6 @@ export interface GradeDelegate<ExtArgs extends runtime.Types.Extensions.Internal
   createMany<T extends GradeCreateManyArgs>(args?: Prisma.SelectSubset<T, GradeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many Grades and returns the data saved in the database.
-   * @param {GradeCreateManyAndReturnArgs} args - Arguments to create many Grades.
-   * @example
-   * // Create many Grades
-   * const grade = await prisma.grade.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many Grades and only return the `id`
-   * const gradeWithIdOnly = await prisma.grade.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends GradeCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, GradeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GradePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a Grade.
    * @param {GradeDeleteArgs} args - Arguments to delete one Grade.
    * @example
@@ -969,36 +919,6 @@ export interface GradeDelegate<ExtArgs extends runtime.Types.Extensions.Internal
   updateMany<T extends GradeUpdateManyArgs>(args: Prisma.SelectSubset<T, GradeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more Grades and returns the data updated in the database.
-   * @param {GradeUpdateManyAndReturnArgs} args - Arguments to update many Grades.
-   * @example
-   * // Update many Grades
-   * const grade = await prisma.grade.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more Grades and only return the `id`
-   * const gradeWithIdOnly = await prisma.grade.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends GradeUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, GradeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GradePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Create or update one Grade.
    * @param {GradeUpsertArgs} args - Arguments to update or create a Grade.
    * @example
@@ -1016,6 +936,29 @@ export interface GradeDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    * })
    */
   upsert<T extends GradeUpsertArgs>(args: Prisma.SelectSubset<T, GradeUpsertArgs<ExtArgs>>): Prisma.Prisma__GradeClient<runtime.Types.Result.GetResult<Prisma.$GradePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+  /**
+   * Find zero or more Grades that matches the filter.
+   * @param {GradeFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const grade = await prisma.grade.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(args?: Prisma.GradeFindRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a Grade.
+   * @param {GradeAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const grade = await prisma.grade.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(args?: Prisma.GradeAggregateRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
 
 
   /**
@@ -1423,26 +1366,6 @@ export type GradeCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * The data used to create many Grades.
    */
   data: Prisma.GradeCreateManyInput | Prisma.GradeCreateManyInput[]
-  skipDuplicates?: boolean
-}
-
-/**
- * Grade createManyAndReturn
- */
-export type GradeCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Grade
-   */
-  select?: Prisma.GradeSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Grade
-   */
-  omit?: Prisma.GradeOmit<ExtArgs> | null
-  /**
-   * The data used to create many Grades.
-   */
-  data: Prisma.GradeCreateManyInput | Prisma.GradeCreateManyInput[]
-  skipDuplicates?: boolean
 }
 
 /**
@@ -1475,32 +1398,6 @@ export type GradeUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
  * Grade updateMany
  */
 export type GradeUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * The data used to update Grades.
-   */
-  data: Prisma.XOR<Prisma.GradeUpdateManyMutationInput, Prisma.GradeUncheckedUpdateManyInput>
-  /**
-   * Filter which Grades to update
-   */
-  where?: Prisma.GradeWhereInput
-  /**
-   * Limit how many Grades to update.
-   */
-  limit?: number
-}
-
-/**
- * Grade updateManyAndReturn
- */
-export type GradeUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Grade
-   */
-  select?: Prisma.GradeSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Grade
-   */
-  omit?: Prisma.GradeOmit<ExtArgs> | null
   /**
    * The data used to update Grades.
    */
@@ -1579,6 +1476,34 @@ export type GradeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Grades to delete.
    */
   limit?: number
+}
+
+/**
+ * Grade findRaw
+ */
+export type GradeFindRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * Grade aggregateRaw
+ */
+export type GradeAggregateRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**

@@ -270,7 +270,6 @@ export type NotificationUncheckedCreateInput = {
 }
 
 export type NotificationUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
@@ -280,7 +279,6 @@ export type NotificationUpdateInput = {
 }
 
 export type NotificationUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
@@ -300,7 +298,6 @@ export type NotificationCreateManyInput = {
 }
 
 export type NotificationUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
@@ -310,7 +307,6 @@ export type NotificationUpdateManyMutationInput = {
 }
 
 export type NotificationUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
@@ -361,25 +357,7 @@ export type NotificationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   isRead?: boolean
 }, ExtArgs["result"]["notification"]>
 
-export type NotificationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  title?: boolean
-  message?: boolean
-  type?: boolean
-  audience?: boolean
-  createdAt?: boolean
-  isRead?: boolean
-}, ExtArgs["result"]["notification"]>
 
-export type NotificationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  title?: boolean
-  message?: boolean
-  type?: boolean
-  audience?: boolean
-  createdAt?: boolean
-  isRead?: boolean
-}, ExtArgs["result"]["notification"]>
 
 export type NotificationSelectScalar = {
   id?: boolean
@@ -522,30 +500,6 @@ export interface NotificationDelegate<ExtArgs extends runtime.Types.Extensions.I
   createMany<T extends NotificationCreateManyArgs>(args?: Prisma.SelectSubset<T, NotificationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many Notifications and returns the data saved in the database.
-   * @param {NotificationCreateManyAndReturnArgs} args - Arguments to create many Notifications.
-   * @example
-   * // Create many Notifications
-   * const notification = await prisma.notification.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many Notifications and only return the `id`
-   * const notificationWithIdOnly = await prisma.notification.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends NotificationCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, NotificationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a Notification.
    * @param {NotificationDeleteArgs} args - Arguments to delete one Notification.
    * @example
@@ -610,36 +564,6 @@ export interface NotificationDelegate<ExtArgs extends runtime.Types.Extensions.I
   updateMany<T extends NotificationUpdateManyArgs>(args: Prisma.SelectSubset<T, NotificationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more Notifications and returns the data updated in the database.
-   * @param {NotificationUpdateManyAndReturnArgs} args - Arguments to update many Notifications.
-   * @example
-   * // Update many Notifications
-   * const notification = await prisma.notification.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more Notifications and only return the `id`
-   * const notificationWithIdOnly = await prisma.notification.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends NotificationUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, NotificationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Create or update one Notification.
    * @param {NotificationUpsertArgs} args - Arguments to update or create a Notification.
    * @example
@@ -657,6 +581,29 @@ export interface NotificationDelegate<ExtArgs extends runtime.Types.Extensions.I
    * })
    */
   upsert<T extends NotificationUpsertArgs>(args: Prisma.SelectSubset<T, NotificationUpsertArgs<ExtArgs>>): Prisma.Prisma__NotificationClient<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+  /**
+   * Find zero or more Notifications that matches the filter.
+   * @param {NotificationFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const notification = await prisma.notification.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(args?: Prisma.NotificationFindRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a Notification.
+   * @param {NotificationAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const notification = await prisma.notification.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(args?: Prisma.NotificationAggregateRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
 
 
   /**
@@ -1039,26 +986,6 @@ export type NotificationCreateManyArgs<ExtArgs extends runtime.Types.Extensions.
    * The data used to create many Notifications.
    */
   data: Prisma.NotificationCreateManyInput | Prisma.NotificationCreateManyInput[]
-  skipDuplicates?: boolean
-}
-
-/**
- * Notification createManyAndReturn
- */
-export type NotificationCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Notification
-   */
-  select?: Prisma.NotificationSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Notification
-   */
-  omit?: Prisma.NotificationOmit<ExtArgs> | null
-  /**
-   * The data used to create many Notifications.
-   */
-  data: Prisma.NotificationCreateManyInput | Prisma.NotificationCreateManyInput[]
-  skipDuplicates?: boolean
 }
 
 /**
@@ -1087,32 +1014,6 @@ export type NotificationUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inte
  * Notification updateMany
  */
 export type NotificationUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * The data used to update Notifications.
-   */
-  data: Prisma.XOR<Prisma.NotificationUpdateManyMutationInput, Prisma.NotificationUncheckedUpdateManyInput>
-  /**
-   * Filter which Notifications to update
-   */
-  where?: Prisma.NotificationWhereInput
-  /**
-   * Limit how many Notifications to update.
-   */
-  limit?: number
-}
-
-/**
- * Notification updateManyAndReturn
- */
-export type NotificationUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Notification
-   */
-  select?: Prisma.NotificationSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Notification
-   */
-  omit?: Prisma.NotificationOmit<ExtArgs> | null
   /**
    * The data used to update Notifications.
    */
@@ -1183,6 +1084,34 @@ export type NotificationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many Notifications to delete.
    */
   limit?: number
+}
+
+/**
+ * Notification findRaw
+ */
+export type NotificationFindRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * Notification aggregateRaw
+ */
+export type NotificationAggregateRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**

@@ -1,15 +1,15 @@
 generator client {
-  provider   = "prisma-client"
-  output     = "../src/generated/prisma"
-  engineType = "client"
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id           String         @id
+  id           String         @id @map("_id")
   firstName    String
   lastName     String
   username     String         @unique
@@ -26,19 +26,19 @@ model User {
 }
 
 model AdminSession {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   tokenHash String   @unique
   userId    String
   expiresAt DateTime
   createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([expiresAt])
 }
 
 model Grade {
-  id       String    @id
+  id       String    @id @map("_id")
   name     String
   stage    String
   order    Int
@@ -49,7 +49,7 @@ model Grade {
 }
 
 model Subject {
-  id           String    @id
+  id           String    @id @map("_id")
   name         String
   icon         String
   color        String
@@ -59,14 +59,14 @@ model Subject {
   handoutCount Int       @default(0)
   bookCount    Int       @default(0)
   quizCount    Int       @default(0)
-  grade        Grade     @relation(fields: [gradeId], references: [id], onDelete: Cascade)
+  grade        Grade     @relation(fields: [gradeId], references: [id])
   videos       Video[]
   handouts     Handout[]
   quizzes      Quiz[]
 }
 
 model Video {
-  id          String   @id @default(cuid())
+  id          String   @id @default(cuid()) @map("_id")
   title       String
   description String
   thumbnail   String
@@ -81,8 +81,8 @@ model Video {
   isFree      Boolean  @default(true)
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
-  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
-  grade       Grade    @relation(fields: [gradeId], references: [id], onDelete: Cascade)
+  subject     Subject  @relation(fields: [subjectId], references: [id])
+  grade       Grade    @relation(fields: [gradeId], references: [id])
 
   @@index([subjectId])
   @@index([gradeId])
@@ -90,7 +90,7 @@ model Video {
 }
 
 model Handout {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   title     String
   cover     String
   fileUrl   String
@@ -102,8 +102,8 @@ model Handout {
   isFree    Boolean  @default(true)
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
-  subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
-  grade     Grade    @relation(fields: [gradeId], references: [id], onDelete: Cascade)
+  subject   Subject  @relation(fields: [subjectId], references: [id])
+  grade     Grade    @relation(fields: [gradeId], references: [id])
 
   @@index([subjectId])
   @@index([gradeId])
@@ -111,7 +111,7 @@ model Handout {
 }
 
 model Quiz {
-  id            String   @id @default(cuid())
+  id            String   @id @default(cuid()) @map("_id")
   title         String
   subjectId     String
   gradeId       String
@@ -122,8 +122,8 @@ model Quiz {
   questions     Json
   isActive      Boolean  @default(true)
   createdAt     DateTime @default(now())
-  subject       Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
-  grade         Grade    @relation(fields: [gradeId], references: [id], onDelete: Cascade)
+  subject       Subject  @relation(fields: [subjectId], references: [id])
+  grade         Grade    @relation(fields: [gradeId], references: [id])
 
   @@index([subjectId])
   @@index([gradeId])
@@ -131,7 +131,7 @@ model Quiz {
 }
 
 model Teacher {
-  id         String @id
+  id         String @id @map("_id")
   name       String
   avatar     String
   subject    String
@@ -140,7 +140,7 @@ model Teacher {
 }
 
 model Notification {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   title     String
   message   String
   type      String
@@ -152,7 +152,7 @@ model Notification {
 }
 
 model Banner {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("_id")
   title     String
   subtitle  String
   imageUrl  String
@@ -165,7 +165,7 @@ model Banner {
 }
 
 model SiteSetting {
-  id                String   @id
+  id                String   @id @map("_id")
   siteName          String
   siteDescription   String
   telegramHandle    String

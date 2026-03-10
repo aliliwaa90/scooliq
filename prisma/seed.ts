@@ -1,6 +1,4 @@
-import { PrismaPg } from '@prisma/adapter-pg';
-import { PrismaClient } from '../src/generated/prisma/client';
-import type { Prisma } from '../src/generated/prisma/client';
+import { Prisma, PrismaClient } from '../src/generated/prisma/index.js';
 import {
   banners,
   grades,
@@ -15,15 +13,13 @@ import {
 } from '../src/lib/data.ts';
 import { createPasswordHash } from '../src/lib/password.ts';
 
-const connectionString = process.env.DIRECT_URL ?? process.env.DATABASE_URL;
+const connectionString = process.env.DATABASE_URL;
 
 if (!connectionString) {
-  throw new Error('Set DIRECT_URL or DATABASE_URL before running the seed.');
+  throw new Error('Set DATABASE_URL before running the seed.');
 }
 
-const client = new PrismaClient({
-  adapter: new PrismaPg({ connectionString }),
-});
+const client = new PrismaClient({});
 
 function toDate(value: string) {
   return new Date(`${value}T00:00:00.000Z`);
@@ -48,6 +44,7 @@ async function main() {
       passwordHash:
         user.username === 'alifakarr' ? createPasswordHash('Aliliwaa00') : null,
       createdAt: toDate(user.createdAt),
+      updatedAt: toDate(user.createdAt),
     })),
   });
 

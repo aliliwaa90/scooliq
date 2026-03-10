@@ -378,7 +378,6 @@ export type SubjectUncheckedCreateInput = {
 }
 
 export type SubjectUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -394,7 +393,6 @@ export type SubjectUpdateInput = {
 }
 
 export type SubjectUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -423,7 +421,6 @@ export type SubjectCreateManyInput = {
 }
 
 export type SubjectUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -435,7 +432,6 @@ export type SubjectUpdateManyMutationInput = {
 }
 
 export type SubjectUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -636,7 +632,6 @@ export type SubjectCreateOrConnectWithoutGradeInput = {
 
 export type SubjectCreateManyGradeInputEnvelope = {
   data: Prisma.SubjectCreateManyGradeInput | Prisma.SubjectCreateManyGradeInput[]
-  skipDuplicates?: boolean
 }
 
 export type SubjectUpsertWithWhereUniqueWithoutGradeInput = {
@@ -718,7 +713,6 @@ export type SubjectUpdateToOneWithWhereWithoutVideosInput = {
 }
 
 export type SubjectUpdateWithoutVideosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -733,7 +727,6 @@ export type SubjectUpdateWithoutVideosInput = {
 }
 
 export type SubjectUncheckedUpdateWithoutVideosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -794,7 +787,6 @@ export type SubjectUpdateToOneWithWhereWithoutHandoutsInput = {
 }
 
 export type SubjectUpdateWithoutHandoutsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -809,7 +801,6 @@ export type SubjectUpdateWithoutHandoutsInput = {
 }
 
 export type SubjectUncheckedUpdateWithoutHandoutsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -870,7 +861,6 @@ export type SubjectUpdateToOneWithWhereWithoutQuizzesInput = {
 }
 
 export type SubjectUpdateWithoutQuizzesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -885,7 +875,6 @@ export type SubjectUpdateWithoutQuizzesInput = {
 }
 
 export type SubjectUncheckedUpdateWithoutQuizzesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -912,7 +901,6 @@ export type SubjectCreateManyGradeInput = {
 }
 
 export type SubjectUpdateWithoutGradeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -927,7 +915,6 @@ export type SubjectUpdateWithoutGradeInput = {
 }
 
 export type SubjectUncheckedUpdateWithoutGradeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -942,7 +929,6 @@ export type SubjectUncheckedUpdateWithoutGradeInput = {
 }
 
 export type SubjectUncheckedUpdateManyWithoutGradeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1020,33 +1006,7 @@ export type SubjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   _count?: boolean | Prisma.SubjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["subject"]>
 
-export type SubjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  name?: boolean
-  icon?: boolean
-  color?: boolean
-  gradeId?: boolean
-  description?: boolean
-  videoCount?: boolean
-  handoutCount?: boolean
-  bookCount?: boolean
-  quizCount?: boolean
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["subject"]>
 
-export type SubjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  name?: boolean
-  icon?: boolean
-  color?: boolean
-  gradeId?: boolean
-  description?: boolean
-  videoCount?: boolean
-  handoutCount?: boolean
-  bookCount?: boolean
-  quizCount?: boolean
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["subject"]>
 
 export type SubjectSelectScalar = {
   id?: boolean
@@ -1068,12 +1028,6 @@ export type SubjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   handouts?: boolean | Prisma.Subject$handoutsArgs<ExtArgs>
   quizzes?: boolean | Prisma.Subject$quizzesArgs<ExtArgs>
   _count?: boolean | Prisma.SubjectCountOutputTypeDefaultArgs<ExtArgs>
-}
-export type SubjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}
-export type SubjectIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
 }
 
 export type $SubjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1213,30 +1167,6 @@ export interface SubjectDelegate<ExtArgs extends runtime.Types.Extensions.Intern
   createMany<T extends SubjectCreateManyArgs>(args?: Prisma.SelectSubset<T, SubjectCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many Subjects and returns the data saved in the database.
-   * @param {SubjectCreateManyAndReturnArgs} args - Arguments to create many Subjects.
-   * @example
-   * // Create many Subjects
-   * const subject = await prisma.subject.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many Subjects and only return the `id`
-   * const subjectWithIdOnly = await prisma.subject.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends SubjectCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, SubjectCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a Subject.
    * @param {SubjectDeleteArgs} args - Arguments to delete one Subject.
    * @example
@@ -1301,36 +1231,6 @@ export interface SubjectDelegate<ExtArgs extends runtime.Types.Extensions.Intern
   updateMany<T extends SubjectUpdateManyArgs>(args: Prisma.SelectSubset<T, SubjectUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more Subjects and returns the data updated in the database.
-   * @param {SubjectUpdateManyAndReturnArgs} args - Arguments to update many Subjects.
-   * @example
-   * // Update many Subjects
-   * const subject = await prisma.subject.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more Subjects and only return the `id`
-   * const subjectWithIdOnly = await prisma.subject.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends SubjectUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, SubjectUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Create or update one Subject.
    * @param {SubjectUpsertArgs} args - Arguments to update or create a Subject.
    * @example
@@ -1348,6 +1248,29 @@ export interface SubjectDelegate<ExtArgs extends runtime.Types.Extensions.Intern
    * })
    */
   upsert<T extends SubjectUpsertArgs>(args: Prisma.SelectSubset<T, SubjectUpsertArgs<ExtArgs>>): Prisma.Prisma__SubjectClient<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+  /**
+   * Find zero or more Subjects that matches the filter.
+   * @param {SubjectFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const subject = await prisma.subject.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(args?: Prisma.SubjectFindRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a Subject.
+   * @param {SubjectAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const subject = await prisma.subject.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(args?: Prisma.SubjectAggregateRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
 
 
   /**
@@ -1761,30 +1684,6 @@ export type SubjectCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * The data used to create many Subjects.
    */
   data: Prisma.SubjectCreateManyInput | Prisma.SubjectCreateManyInput[]
-  skipDuplicates?: boolean
-}
-
-/**
- * Subject createManyAndReturn
- */
-export type SubjectCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Subject
-   */
-  select?: Prisma.SubjectSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Subject
-   */
-  omit?: Prisma.SubjectOmit<ExtArgs> | null
-  /**
-   * The data used to create many Subjects.
-   */
-  data: Prisma.SubjectCreateManyInput | Prisma.SubjectCreateManyInput[]
-  skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.SubjectIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1829,36 +1728,6 @@ export type SubjectUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Subjects to update.
    */
   limit?: number
-}
-
-/**
- * Subject updateManyAndReturn
- */
-export type SubjectUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Subject
-   */
-  select?: Prisma.SubjectSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Subject
-   */
-  omit?: Prisma.SubjectOmit<ExtArgs> | null
-  /**
-   * The data used to update Subjects.
-   */
-  data: Prisma.XOR<Prisma.SubjectUpdateManyMutationInput, Prisma.SubjectUncheckedUpdateManyInput>
-  /**
-   * Filter which Subjects to update
-   */
-  where?: Prisma.SubjectWhereInput
-  /**
-   * Limit how many Subjects to update.
-   */
-  limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.SubjectIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1925,6 +1794,34 @@ export type SubjectDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Subjects to delete.
    */
   limit?: number
+}
+
+/**
+ * Subject findRaw
+ */
+export type SubjectFindRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * Subject aggregateRaw
+ */
+export type SubjectAggregateRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**

@@ -1,0 +1,175 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String         @id @map("_id")
+  firstName    String
+  lastName     String
+  username     String         @unique
+  passwordHash String?
+  avatar       String
+  stage        String
+  grade        String
+  province     String
+  role         String
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  sessions     AdminSession[]
+}
+
+model AdminSession {
+  id        String   @id @default(cuid()) @map("_id")
+  tokenHash String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Grade {
+  id       String    @id @map("_id")
+  name     String
+  stage    String
+  order    Int
+  subjects Subject[]
+  videos   Video[]
+  handouts Handout[]
+  quizzes  Quiz[]
+}
+
+model Subject {
+  id           String    @id @map("_id")
+  name         String
+  icon         String
+  color        String
+  gradeId      String
+  description  String
+  videoCount   Int       @default(0)
+  handoutCount Int       @default(0)
+  bookCount    Int       @default(0)
+  quizCount    Int       @default(0)
+  grade        Grade     @relation(fields: [gradeId], references: [id])
+  videos       Video[]
+  handouts     Handout[]
+  quizzes      Quiz[]
+}
+
+model Video {
+  id          String   @id @default(cuid()) @map("_id")
+  title       String
+  description String
+  thumbnail   String
+  url         String
+  teacher     String
+  duration    String
+  views       Int      @default(0)
+  subjectId   String
+  gradeId     String
+  chapter     String
+  lesson      String
+  isFree      Boolean  @default(true)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  subject     Subject  @relation(fields: [subjectId], references: [id])
+  grade       Grade    @relation(fields: [gradeId], references: [id])
+
+  @@index([subjectId])
+  @@index([gradeId])
+  @@index([createdAt])
+}
+
+model Handout {
+  id        String   @id @default(cuid()) @map("_id")
+  title     String
+  cover     String
+  fileUrl   String
+  fileSize  String
+  type      String
+  downloads Int      @default(0)
+  subjectId String
+  gradeId   String
+  isFree    Boolean  @default(true)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  subject   Subject  @relation(fields: [subjectId], references: [id])
+  grade     Grade    @relation(fields: [gradeId], references: [id])
+
+  @@index([subjectId])
+  @@index([gradeId])
+  @@index([createdAt])
+}
+
+model Quiz {
+  id            String   @id @default(cuid()) @map("_id")
+  title         String
+  subjectId     String
+  gradeId       String
+  chapter       String
+  duration      Int
+  questionCount Int      @default(0)
+  attempts      Int      @default(0)
+  questions     Json
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  subject       Subject  @relation(fields: [subjectId], references: [id])
+  grade         Grade    @relation(fields: [gradeId], references: [id])
+
+  @@index([subjectId])
+  @@index([gradeId])
+  @@index([createdAt])
+}
+
+model Teacher {
+  id         String @id @map("_id")
+  name       String
+  avatar     String
+  subject    String
+  bio        String
+  videoCount Int    @default(0)
+}
+
+model Notification {
+  id        String   @id @default(cuid()) @map("_id")
+  title     String
+  message   String
+  type      String
+  audience  String   @default("all")
+  createdAt DateTime @default(now())
+  isRead    Boolean  @default(false)
+
+  @@index([createdAt])
+}
+
+model Banner {
+  id        String   @id @default(cuid()) @map("_id")
+  title     String
+  subtitle  String
+  imageUrl  String
+  linkUrl   String
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([isActive, sortOrder])
+}
+
+model SiteSetting {
+  id                String   @id @map("_id")
+  siteName          String
+  siteDescription   String
+  telegramHandle    String
+  maintenanceMode   Boolean  @default(false)
+  allowRegistration Boolean  @default(true)
+  updatedAt         DateTime @updatedAt
+}

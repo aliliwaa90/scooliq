@@ -424,7 +424,6 @@ export type VideoUncheckedCreateInput = {
 }
 
 export type VideoUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.StringFieldUpdateOperationsInput | string
@@ -442,7 +441,6 @@ export type VideoUpdateInput = {
 }
 
 export type VideoUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.StringFieldUpdateOperationsInput | string
@@ -478,7 +476,6 @@ export type VideoCreateManyInput = {
 }
 
 export type VideoUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.StringFieldUpdateOperationsInput | string
@@ -494,7 +491,6 @@ export type VideoUpdateManyMutationInput = {
 }
 
 export type VideoUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.StringFieldUpdateOperationsInput | string
@@ -708,7 +704,6 @@ export type VideoCreateOrConnectWithoutGradeInput = {
 
 export type VideoCreateManyGradeInputEnvelope = {
   data: Prisma.VideoCreateManyGradeInput | Prisma.VideoCreateManyGradeInput[]
-  skipDuplicates?: boolean
 }
 
 export type VideoUpsertWithWhereUniqueWithoutGradeInput = {
@@ -789,7 +784,6 @@ export type VideoCreateOrConnectWithoutSubjectInput = {
 
 export type VideoCreateManySubjectInputEnvelope = {
   data: Prisma.VideoCreateManySubjectInput | Prisma.VideoCreateManySubjectInput[]
-  skipDuplicates?: boolean
 }
 
 export type VideoUpsertWithWhereUniqueWithoutSubjectInput = {
@@ -826,7 +820,6 @@ export type VideoCreateManyGradeInput = {
 }
 
 export type VideoUpdateWithoutGradeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.StringFieldUpdateOperationsInput | string
@@ -843,7 +836,6 @@ export type VideoUpdateWithoutGradeInput = {
 }
 
 export type VideoUncheckedUpdateWithoutGradeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.StringFieldUpdateOperationsInput | string
@@ -860,7 +852,6 @@ export type VideoUncheckedUpdateWithoutGradeInput = {
 }
 
 export type VideoUncheckedUpdateManyWithoutGradeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.StringFieldUpdateOperationsInput | string
@@ -894,7 +885,6 @@ export type VideoCreateManySubjectInput = {
 }
 
 export type VideoUpdateWithoutSubjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.StringFieldUpdateOperationsInput | string
@@ -911,7 +901,6 @@ export type VideoUpdateWithoutSubjectInput = {
 }
 
 export type VideoUncheckedUpdateWithoutSubjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.StringFieldUpdateOperationsInput | string
@@ -928,7 +917,6 @@ export type VideoUncheckedUpdateWithoutSubjectInput = {
 }
 
 export type VideoUncheckedUpdateManyWithoutSubjectInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnail?: Prisma.StringFieldUpdateOperationsInput | string
@@ -966,45 +954,7 @@ export type VideoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["video"]>
 
-export type VideoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  title?: boolean
-  description?: boolean
-  thumbnail?: boolean
-  url?: boolean
-  teacher?: boolean
-  duration?: boolean
-  views?: boolean
-  subjectId?: boolean
-  gradeId?: boolean
-  chapter?: boolean
-  lesson?: boolean
-  isFree?: boolean
-  isActive?: boolean
-  createdAt?: boolean
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["video"]>
 
-export type VideoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  title?: boolean
-  description?: boolean
-  thumbnail?: boolean
-  url?: boolean
-  teacher?: boolean
-  duration?: boolean
-  views?: boolean
-  subjectId?: boolean
-  gradeId?: boolean
-  chapter?: boolean
-  lesson?: boolean
-  isFree?: boolean
-  isActive?: boolean
-  createdAt?: boolean
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["video"]>
 
 export type VideoSelectScalar = {
   id?: boolean
@@ -1026,14 +976,6 @@ export type VideoSelectScalar = {
 
 export type VideoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "thumbnail" | "url" | "teacher" | "duration" | "views" | "subjectId" | "gradeId" | "chapter" | "lesson" | "isFree" | "isActive" | "createdAt", ExtArgs["result"]["video"]>
 export type VideoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}
-export type VideoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
-  grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
-}
-export type VideoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
   grade?: boolean | Prisma.GradeDefaultArgs<ExtArgs>
 }
@@ -1178,30 +1120,6 @@ export interface VideoDelegate<ExtArgs extends runtime.Types.Extensions.Internal
   createMany<T extends VideoCreateManyArgs>(args?: Prisma.SelectSubset<T, VideoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many Videos and returns the data saved in the database.
-   * @param {VideoCreateManyAndReturnArgs} args - Arguments to create many Videos.
-   * @example
-   * // Create many Videos
-   * const video = await prisma.video.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many Videos and only return the `id`
-   * const videoWithIdOnly = await prisma.video.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends VideoCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, VideoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a Video.
    * @param {VideoDeleteArgs} args - Arguments to delete one Video.
    * @example
@@ -1266,36 +1184,6 @@ export interface VideoDelegate<ExtArgs extends runtime.Types.Extensions.Internal
   updateMany<T extends VideoUpdateManyArgs>(args: Prisma.SelectSubset<T, VideoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more Videos and returns the data updated in the database.
-   * @param {VideoUpdateManyAndReturnArgs} args - Arguments to update many Videos.
-   * @example
-   * // Update many Videos
-   * const video = await prisma.video.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more Videos and only return the `id`
-   * const videoWithIdOnly = await prisma.video.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends VideoUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, VideoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Create or update one Video.
    * @param {VideoUpsertArgs} args - Arguments to update or create a Video.
    * @example
@@ -1313,6 +1201,29 @@ export interface VideoDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    * })
    */
   upsert<T extends VideoUpsertArgs>(args: Prisma.SelectSubset<T, VideoUpsertArgs<ExtArgs>>): Prisma.Prisma__VideoClient<runtime.Types.Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+  /**
+   * Find zero or more Videos that matches the filter.
+   * @param {VideoFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const video = await prisma.video.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(args?: Prisma.VideoFindRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a Video.
+   * @param {VideoAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const video = await prisma.video.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(args?: Prisma.VideoAggregateRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
 
 
   /**
@@ -1729,30 +1640,6 @@ export type VideoCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * The data used to create many Videos.
    */
   data: Prisma.VideoCreateManyInput | Prisma.VideoCreateManyInput[]
-  skipDuplicates?: boolean
-}
-
-/**
- * Video createManyAndReturn
- */
-export type VideoCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Video
-   */
-  select?: Prisma.VideoSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Video
-   */
-  omit?: Prisma.VideoOmit<ExtArgs> | null
-  /**
-   * The data used to create many Videos.
-   */
-  data: Prisma.VideoCreateManyInput | Prisma.VideoCreateManyInput[]
-  skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.VideoIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1797,36 +1684,6 @@ export type VideoUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Videos to update.
    */
   limit?: number
-}
-
-/**
- * Video updateManyAndReturn
- */
-export type VideoUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Video
-   */
-  select?: Prisma.VideoSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Video
-   */
-  omit?: Prisma.VideoOmit<ExtArgs> | null
-  /**
-   * The data used to update Videos.
-   */
-  data: Prisma.XOR<Prisma.VideoUpdateManyMutationInput, Prisma.VideoUncheckedUpdateManyInput>
-  /**
-   * Filter which Videos to update
-   */
-  where?: Prisma.VideoWhereInput
-  /**
-   * Limit how many Videos to update.
-   */
-  limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.VideoIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1893,6 +1750,34 @@ export type VideoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Videos to delete.
    */
   limit?: number
+}
+
+/**
+ * Video findRaw
+ */
+export type VideoFindRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * Video aggregateRaw
+ */
+export type VideoAggregateRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**

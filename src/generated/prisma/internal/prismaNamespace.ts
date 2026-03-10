@@ -411,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
   }
   meta: {
     modelProps: "user" | "adminSession" | "grade" | "subject" | "video" | "handout" | "quiz" | "teacher" | "notification" | "banner" | "siteSetting"
-    txIsolationLevel: TransactionIsolationLevel
+    txIsolationLevel: never
   }
   model: {
     User: {
@@ -446,10 +446,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.UserCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        createManyAndReturn: {
-          args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>[]
-        }
         delete: {
           args: Prisma.UserDeleteArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
@@ -466,10 +462,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.UserUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        updateManyAndReturn: {
-          args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>[]
-        }
         upsert: {
           args: Prisma.UserUpsertArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
@@ -481,6 +473,14 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         groupBy: {
           args: Prisma.UserGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.UserFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.UserAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
         }
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
@@ -520,10 +520,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.AdminSessionCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        createManyAndReturn: {
-          args: Prisma.AdminSessionCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSessionPayload>[]
-        }
         delete: {
           args: Prisma.AdminSessionDeleteArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSessionPayload>
@@ -540,10 +536,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.AdminSessionUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        updateManyAndReturn: {
-          args: Prisma.AdminSessionUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSessionPayload>[]
-        }
         upsert: {
           args: Prisma.AdminSessionUpsertArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminSessionPayload>
@@ -555,6 +547,14 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         groupBy: {
           args: Prisma.AdminSessionGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AdminSessionGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.AdminSessionFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.AdminSessionAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
         }
         count: {
           args: Prisma.AdminSessionCountArgs<ExtArgs>
@@ -594,10 +594,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.GradeCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        createManyAndReturn: {
-          args: Prisma.GradeCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>[]
-        }
         delete: {
           args: Prisma.GradeDeleteArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>
@@ -614,10 +610,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.GradeUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        updateManyAndReturn: {
-          args: Prisma.GradeUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>[]
-        }
         upsert: {
           args: Prisma.GradeUpsertArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$GradePayload>
@@ -629,6 +621,14 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         groupBy: {
           args: Prisma.GradeGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.GradeGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.GradeFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.GradeAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
         }
         count: {
           args: Prisma.GradeCountArgs<ExtArgs>
@@ -668,10 +668,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.SubjectCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        createManyAndReturn: {
-          args: Prisma.SubjectCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubjectPayload>[]
-        }
         delete: {
           args: Prisma.SubjectDeleteArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$SubjectPayload>
@@ -688,10 +684,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.SubjectUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        updateManyAndReturn: {
-          args: Prisma.SubjectUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubjectPayload>[]
-        }
         upsert: {
           args: Prisma.SubjectUpsertArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$SubjectPayload>
@@ -703,6 +695,14 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         groupBy: {
           args: Prisma.SubjectGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SubjectGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.SubjectFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.SubjectAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
         }
         count: {
           args: Prisma.SubjectCountArgs<ExtArgs>
@@ -742,10 +742,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.VideoCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        createManyAndReturn: {
-          args: Prisma.VideoCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>[]
-        }
         delete: {
           args: Prisma.VideoDeleteArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>
@@ -762,10 +758,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.VideoUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        updateManyAndReturn: {
-          args: Prisma.VideoUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>[]
-        }
         upsert: {
           args: Prisma.VideoUpsertArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$VideoPayload>
@@ -777,6 +769,14 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         groupBy: {
           args: Prisma.VideoGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.VideoGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.VideoFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.VideoAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
         }
         count: {
           args: Prisma.VideoCountArgs<ExtArgs>
@@ -816,10 +816,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.HandoutCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        createManyAndReturn: {
-          args: Prisma.HandoutCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandoutPayload>[]
-        }
         delete: {
           args: Prisma.HandoutDeleteArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$HandoutPayload>
@@ -836,10 +832,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.HandoutUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        updateManyAndReturn: {
-          args: Prisma.HandoutUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandoutPayload>[]
-        }
         upsert: {
           args: Prisma.HandoutUpsertArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$HandoutPayload>
@@ -851,6 +843,14 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         groupBy: {
           args: Prisma.HandoutGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.HandoutGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.HandoutFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.HandoutAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
         }
         count: {
           args: Prisma.HandoutCountArgs<ExtArgs>
@@ -890,10 +890,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.QuizCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        createManyAndReturn: {
-          args: Prisma.QuizCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuizPayload>[]
-        }
         delete: {
           args: Prisma.QuizDeleteArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$QuizPayload>
@@ -910,10 +906,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.QuizUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        updateManyAndReturn: {
-          args: Prisma.QuizUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuizPayload>[]
-        }
         upsert: {
           args: Prisma.QuizUpsertArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$QuizPayload>
@@ -925,6 +917,14 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         groupBy: {
           args: Prisma.QuizGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.QuizGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.QuizFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.QuizAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
         }
         count: {
           args: Prisma.QuizCountArgs<ExtArgs>
@@ -964,10 +964,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.TeacherCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        createManyAndReturn: {
-          args: Prisma.TeacherCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeacherPayload>[]
-        }
         delete: {
           args: Prisma.TeacherDeleteArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$TeacherPayload>
@@ -984,10 +980,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.TeacherUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        updateManyAndReturn: {
-          args: Prisma.TeacherUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TeacherPayload>[]
-        }
         upsert: {
           args: Prisma.TeacherUpsertArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$TeacherPayload>
@@ -999,6 +991,14 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         groupBy: {
           args: Prisma.TeacherGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.TeacherGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.TeacherFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.TeacherAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
         }
         count: {
           args: Prisma.TeacherCountArgs<ExtArgs>
@@ -1038,10 +1038,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.NotificationCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        createManyAndReturn: {
-          args: Prisma.NotificationCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
-        }
         delete: {
           args: Prisma.NotificationDeleteArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
@@ -1058,10 +1054,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.NotificationUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        updateManyAndReturn: {
-          args: Prisma.NotificationUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
-        }
         upsert: {
           args: Prisma.NotificationUpsertArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
@@ -1073,6 +1065,14 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         groupBy: {
           args: Prisma.NotificationGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.NotificationGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.NotificationFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.NotificationAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
         }
         count: {
           args: Prisma.NotificationCountArgs<ExtArgs>
@@ -1112,10 +1112,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.BannerCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        createManyAndReturn: {
-          args: Prisma.BannerCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BannerPayload>[]
-        }
         delete: {
           args: Prisma.BannerDeleteArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$BannerPayload>
@@ -1132,10 +1128,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.BannerUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        updateManyAndReturn: {
-          args: Prisma.BannerUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$BannerPayload>[]
-        }
         upsert: {
           args: Prisma.BannerUpsertArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$BannerPayload>
@@ -1147,6 +1139,14 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         groupBy: {
           args: Prisma.BannerGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.BannerGroupByOutputType>[]
+        }
+        findRaw: {
+          args: Prisma.BannerFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.BannerAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
         }
         count: {
           args: Prisma.BannerCountArgs<ExtArgs>
@@ -1186,10 +1186,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.SiteSettingCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        createManyAndReturn: {
-          args: Prisma.SiteSettingCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteSettingPayload>[]
-        }
         delete: {
           args: Prisma.SiteSettingDeleteArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteSettingPayload>
@@ -1206,10 +1202,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.SiteSettingUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
-        updateManyAndReturn: {
-          args: Prisma.SiteSettingUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteSettingPayload>[]
-        }
         upsert: {
           args: Prisma.SiteSettingUpsertArgs<ExtArgs>
           result: runtime.Types.Utils.PayloadToResult<Prisma.$SiteSettingPayload>
@@ -1222,6 +1214,14 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
           args: Prisma.SiteSettingGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SiteSettingGroupByOutputType>[]
         }
+        findRaw: {
+          args: Prisma.SiteSettingFindRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
+        aggregateRaw: {
+          args: Prisma.SiteSettingAggregateRawArgs<ExtArgs>
+          result: Prisma.JsonObject
+        }
         count: {
           args: Prisma.SiteSettingCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SiteSettingCountAggregateOutputType> | number
@@ -1233,21 +1233,9 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
   other: {
     payload: any
     operations: {
-      $executeRaw: {
-        args: [query: TemplateStringsArray | Sql, ...values: any[]],
-        result: any
-      }
-      $executeRawUnsafe: {
-        args: [query: string, ...values: any[]],
-        result: any
-      }
-      $queryRaw: {
-        args: [query: TemplateStringsArray | Sql, ...values: any[]],
-        result: any
-      }
-      $queryRawUnsafe: {
-        args: [query: string, ...values: any[]],
-        result: any
+      $runCommandRaw: {
+        args: Prisma.InputJsonObject,
+        result: JsonObject
       }
     }
   }
@@ -1256,16 +1244,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
 /**
  * Enums
  */
-
-export const TransactionIsolationLevel = runtime.makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
-  Serializable: 'Serializable'
-} as const)
-
-export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
 
 export const UserScalarFieldEnum = {
   id: 'id',
@@ -1439,36 +1417,12 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-export const JsonNullValueInput = {
-  JsonNull: JsonNull
-} as const
-
-export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
-
-
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const JsonNullValueFilter = {
-  DbNull: DbNull,
-  JsonNull: JsonNull,
-  AnyNull: AnyNull
-} as const
-
-export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -1530,13 +1484,6 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Json'
  */
 export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-/**
- * Reference to a field of type 'QueryMode'
- */
-export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -1613,7 +1560,6 @@ export type PrismaClientOptions = ({
   transactionOptions?: {
     maxWait?: number
     timeout?: number
-    isolationLevel?: TransactionIsolationLevel
   }
   /**
    * Global configuration for omitting model fields by default.
@@ -1630,22 +1576,6 @@ export type PrismaClientOptions = ({
    * ```
    */
   omit?: GlobalOmitConfig
-  /**
-   * SQL commenter plugins that add metadata to SQL queries as comments.
-   * Comments follow the sqlcommenter format: https://google.github.io/sqlcommenter/
-   * 
-   * @example
-   * ```
-   * const prisma = new PrismaClient({
-   *   adapter,
-   *   comments: [
-   *     traceContext(),
-   *     queryInsights(),
-   *   ],
-   * })
-   * ```
-   */
-  comments?: runtime.SqlCommenterPlugin[]
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit

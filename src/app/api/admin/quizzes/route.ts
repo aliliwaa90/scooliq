@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { badRequest, requireAdminApi } from '@/lib/admin-api';
 import { syncSubjectStats } from '@/lib/admin-data';
 import type { Question } from '@/lib/data';
-import type { Prisma } from '@/generated/prisma/client';
+import type { Prisma } from '@/generated/prisma';
 import { prisma } from '@/lib/prisma';
 
 function parseQuestions(input: unknown): Question[] | null {
