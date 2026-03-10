@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums"
-import type * as Prisma from "../internal/prismaNamespace"
+import type * as $Enums from "../enums.ts"
+import type * as Prisma from "../internal/prismaNamespace.ts"
 
 /**
  * Model Subject
@@ -351,10 +351,10 @@ export type SubjectCreateInput = {
   icon: string
   color: string
   description: string
-  videoCount: number
-  handoutCount: number
-  bookCount: number
-  quizCount: number
+  videoCount?: number
+  handoutCount?: number
+  bookCount?: number
+  quizCount?: number
   grade: Prisma.GradeCreateNestedOneWithoutSubjectsInput
   videos?: Prisma.VideoCreateNestedManyWithoutSubjectInput
   handouts?: Prisma.HandoutCreateNestedManyWithoutSubjectInput
@@ -368,10 +368,10 @@ export type SubjectUncheckedCreateInput = {
   color: string
   gradeId: string
   description: string
-  videoCount: number
-  handoutCount: number
-  bookCount: number
-  quizCount: number
+  videoCount?: number
+  handoutCount?: number
+  bookCount?: number
+  quizCount?: number
   videos?: Prisma.VideoUncheckedCreateNestedManyWithoutSubjectInput
   handouts?: Prisma.HandoutUncheckedCreateNestedManyWithoutSubjectInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutSubjectInput
@@ -416,10 +416,10 @@ export type SubjectCreateManyInput = {
   color: string
   gradeId: string
   description: string
-  videoCount: number
-  handoutCount: number
-  bookCount: number
-  quizCount: number
+  videoCount?: number
+  handoutCount?: number
+  bookCount?: number
+  quizCount?: number
 }
 
 export type SubjectUpdateManyMutationInput = {
@@ -605,10 +605,10 @@ export type SubjectCreateWithoutGradeInput = {
   icon: string
   color: string
   description: string
-  videoCount: number
-  handoutCount: number
-  bookCount: number
-  quizCount: number
+  videoCount?: number
+  handoutCount?: number
+  bookCount?: number
+  quizCount?: number
   videos?: Prisma.VideoCreateNestedManyWithoutSubjectInput
   handouts?: Prisma.HandoutCreateNestedManyWithoutSubjectInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutSubjectInput
@@ -620,10 +620,10 @@ export type SubjectUncheckedCreateWithoutGradeInput = {
   icon: string
   color: string
   description: string
-  videoCount: number
-  handoutCount: number
-  bookCount: number
-  quizCount: number
+  videoCount?: number
+  handoutCount?: number
+  bookCount?: number
+  quizCount?: number
   videos?: Prisma.VideoUncheckedCreateNestedManyWithoutSubjectInput
   handouts?: Prisma.HandoutUncheckedCreateNestedManyWithoutSubjectInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutSubjectInput
@@ -677,10 +677,10 @@ export type SubjectCreateWithoutVideosInput = {
   icon: string
   color: string
   description: string
-  videoCount: number
-  handoutCount: number
-  bookCount: number
-  quizCount: number
+  videoCount?: number
+  handoutCount?: number
+  bookCount?: number
+  quizCount?: number
   grade: Prisma.GradeCreateNestedOneWithoutSubjectsInput
   handouts?: Prisma.HandoutCreateNestedManyWithoutSubjectInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutSubjectInput
@@ -693,10 +693,10 @@ export type SubjectUncheckedCreateWithoutVideosInput = {
   color: string
   gradeId: string
   description: string
-  videoCount: number
-  handoutCount: number
-  bookCount: number
-  quizCount: number
+  videoCount?: number
+  handoutCount?: number
+  bookCount?: number
+  quizCount?: number
   handouts?: Prisma.HandoutUncheckedCreateNestedManyWithoutSubjectInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutSubjectInput
 }
@@ -753,10 +753,10 @@ export type SubjectCreateWithoutHandoutsInput = {
   icon: string
   color: string
   description: string
-  videoCount: number
-  handoutCount: number
-  bookCount: number
-  quizCount: number
+  videoCount?: number
+  handoutCount?: number
+  bookCount?: number
+  quizCount?: number
   grade: Prisma.GradeCreateNestedOneWithoutSubjectsInput
   videos?: Prisma.VideoCreateNestedManyWithoutSubjectInput
   quizzes?: Prisma.QuizCreateNestedManyWithoutSubjectInput
@@ -769,10 +769,10 @@ export type SubjectUncheckedCreateWithoutHandoutsInput = {
   color: string
   gradeId: string
   description: string
-  videoCount: number
-  handoutCount: number
-  bookCount: number
-  quizCount: number
+  videoCount?: number
+  handoutCount?: number
+  bookCount?: number
+  quizCount?: number
   videos?: Prisma.VideoUncheckedCreateNestedManyWithoutSubjectInput
   quizzes?: Prisma.QuizUncheckedCreateNestedManyWithoutSubjectInput
 }
@@ -829,10 +829,10 @@ export type SubjectCreateWithoutQuizzesInput = {
   icon: string
   color: string
   description: string
-  videoCount: number
-  handoutCount: number
-  bookCount: number
-  quizCount: number
+  videoCount?: number
+  handoutCount?: number
+  bookCount?: number
+  quizCount?: number
   grade: Prisma.GradeCreateNestedOneWithoutSubjectsInput
   videos?: Prisma.VideoCreateNestedManyWithoutSubjectInput
   handouts?: Prisma.HandoutCreateNestedManyWithoutSubjectInput
@@ -845,10 +845,10 @@ export type SubjectUncheckedCreateWithoutQuizzesInput = {
   color: string
   gradeId: string
   description: string
-  videoCount: number
-  handoutCount: number
-  bookCount: number
-  quizCount: number
+  videoCount?: number
+  handoutCount?: number
+  bookCount?: number
+  quizCount?: number
   videos?: Prisma.VideoUncheckedCreateNestedManyWithoutSubjectInput
   handouts?: Prisma.HandoutUncheckedCreateNestedManyWithoutSubjectInput
 }
@@ -905,10 +905,10 @@ export type SubjectCreateManyGradeInput = {
   icon: string
   color: string
   description: string
-  videoCount: number
-  handoutCount: number
-  bookCount: number
-  quizCount: number
+  videoCount?: number
+  handoutCount?: number
+  bookCount?: number
+  quizCount?: number
 }
 
 export type SubjectUpdateWithoutGradeInput = {

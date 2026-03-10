@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums"
-import type * as Prisma from "../internal/prismaNamespace"
+import type * as $Enums from "../enums.ts"
+import type * as Prisma from "../internal/prismaNamespace.ts"
 
 /**
  * Model Quiz
@@ -344,31 +344,31 @@ export type QuizScalarWhereWithAggregatesInput = {
 }
 
 export type QuizCreateInput = {
-  id: string
+  id?: string
   title: string
   chapter: string
   duration: number
-  questionCount: number
-  attempts: number
+  questionCount?: number
+  attempts?: number
   questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  isActive: boolean
-  createdAt: Date | string
+  isActive?: boolean
+  createdAt?: Date | string
   subject: Prisma.SubjectCreateNestedOneWithoutQuizzesInput
   grade: Prisma.GradeCreateNestedOneWithoutQuizzesInput
 }
 
 export type QuizUncheckedCreateInput = {
-  id: string
+  id?: string
   title: string
   subjectId: string
   gradeId: string
   chapter: string
   duration: number
-  questionCount: number
-  attempts: number
+  questionCount?: number
+  attempts?: number
   questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  isActive: boolean
-  createdAt: Date | string
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type QuizUpdateInput = {
@@ -400,17 +400,17 @@ export type QuizUncheckedUpdateInput = {
 }
 
 export type QuizCreateManyInput = {
-  id: string
+  id?: string
   title: string
   subjectId: string
   gradeId: string
   chapter: string
   duration: number
-  questionCount: number
-  attempts: number
+  questionCount?: number
+  attempts?: number
   questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  isActive: boolean
-  createdAt: Date | string
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type QuizUpdateManyMutationInput = {
@@ -586,29 +586,29 @@ export type QuizUncheckedUpdateManyWithoutSubjectNestedInput = {
 }
 
 export type QuizCreateWithoutGradeInput = {
-  id: string
+  id?: string
   title: string
   chapter: string
   duration: number
-  questionCount: number
-  attempts: number
+  questionCount?: number
+  attempts?: number
   questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  isActive: boolean
-  createdAt: Date | string
+  isActive?: boolean
+  createdAt?: Date | string
   subject: Prisma.SubjectCreateNestedOneWithoutQuizzesInput
 }
 
 export type QuizUncheckedCreateWithoutGradeInput = {
-  id: string
+  id?: string
   title: string
   subjectId: string
   chapter: string
   duration: number
-  questionCount: number
-  attempts: number
+  questionCount?: number
+  attempts?: number
   questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  isActive: boolean
-  createdAt: Date | string
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type QuizCreateOrConnectWithoutGradeInput = {
@@ -655,29 +655,29 @@ export type QuizScalarWhereInput = {
 }
 
 export type QuizCreateWithoutSubjectInput = {
-  id: string
+  id?: string
   title: string
   chapter: string
   duration: number
-  questionCount: number
-  attempts: number
+  questionCount?: number
+  attempts?: number
   questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  isActive: boolean
-  createdAt: Date | string
+  isActive?: boolean
+  createdAt?: Date | string
   grade: Prisma.GradeCreateNestedOneWithoutQuizzesInput
 }
 
 export type QuizUncheckedCreateWithoutSubjectInput = {
-  id: string
+  id?: string
   title: string
   gradeId: string
   chapter: string
   duration: number
-  questionCount: number
-  attempts: number
+  questionCount?: number
+  attempts?: number
   questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  isActive: boolean
-  createdAt: Date | string
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type QuizCreateOrConnectWithoutSubjectInput = {
@@ -707,16 +707,16 @@ export type QuizUpdateManyWithWhereWithoutSubjectInput = {
 }
 
 export type QuizCreateManyGradeInput = {
-  id: string
+  id?: string
   title: string
   subjectId: string
   chapter: string
   duration: number
-  questionCount: number
-  attempts: number
+  questionCount?: number
+  attempts?: number
   questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  isActive: boolean
-  createdAt: Date | string
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type QuizUpdateWithoutGradeInput = {
@@ -759,16 +759,16 @@ export type QuizUncheckedUpdateManyWithoutGradeInput = {
 }
 
 export type QuizCreateManySubjectInput = {
-  id: string
+  id?: string
   title: string
   gradeId: string
   chapter: string
   duration: number
-  questionCount: number
-  attempts: number
+  questionCount?: number
+  attempts?: number
   questions: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  isActive: boolean
-  createdAt: Date | string
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type QuizUpdateWithoutSubjectInput = {

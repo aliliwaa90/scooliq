@@ -1,8 +1,11 @@
 import type {
+  Banner,
+  CatalogUser,
   Grade,
   Handout,
   Notification,
   Quiz,
+  SiteSetting,
   Subject,
   Teacher,
   Video,
@@ -36,8 +39,14 @@ export interface CatalogData {
   quizzes: Quiz[];
   teachers: Teacher[];
   notifications: Notification[];
+  banners: Banner[];
+  siteSettings: SiteSetting;
   stages: StageMeta[];
   stageToGradeMap: Record<string, string>;
   adminStats: AdminStats;
   provinces: string[];
+}
+
+export interface AdminUserListData {
+  users: CatalogUser[];
 }

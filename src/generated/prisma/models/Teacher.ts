@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums"
-import type * as Prisma from "../internal/prismaNamespace"
+import type * as $Enums from "../enums.ts"
+import type * as Prisma from "../internal/prismaNamespace.ts"
 
 /**
  * Model Teacher
@@ -279,7 +279,7 @@ export type TeacherCreateInput = {
   avatar: string
   subject: string
   bio: string
-  videoCount: number
+  videoCount?: number
 }
 
 export type TeacherUncheckedCreateInput = {
@@ -288,7 +288,7 @@ export type TeacherUncheckedCreateInput = {
   avatar: string
   subject: string
   bio: string
-  videoCount: number
+  videoCount?: number
 }
 
 export type TeacherUpdateInput = {
@@ -315,7 +315,7 @@ export type TeacherCreateManyInput = {
   avatar: string
   subject: string
   bio: string
-  videoCount: number
+  videoCount?: number
 }
 
 export type TeacherUpdateManyMutationInput = {

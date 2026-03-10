@@ -9,17 +9,32 @@ datasource db {
 }
 
 model User {
-  id        String   @id
-  firstName String
-  lastName  String
-  username  String   @unique
-  avatar    String
-  stage     String
-  grade     String
-  province  String
-  role      String
-  isActive  Boolean  @default(true)
+  id           String         @id
+  firstName    String
+  lastName     String
+  username     String         @unique
+  passwordHash String?
+  avatar       String
+  stage        String
+  grade        String
+  province     String
+  role         String
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  sessions     AdminSession[]
+}
+
+model AdminSession {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  expiresAt DateTime
   createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
 }
 
 model Grade {
@@ -40,10 +55,10 @@ model Subject {
   color        String
   gradeId      String
   description  String
-  videoCount   Int
-  handoutCount Int
-  bookCount    Int
-  quizCount    Int
+  videoCount   Int       @default(0)
+  handoutCount Int       @default(0)
+  bookCount    Int       @default(0)
+  quizCount    Int       @default(0)
   grade        Grade     @relation(fields: [gradeId], references: [id], onDelete: Cascade)
   videos       Video[]
   handouts     Handout[]
@@ -51,21 +66,21 @@ model Subject {
 }
 
 model Video {
-  id          String   @id
+  id          String   @id @default(cuid())
   title       String
   description String
   thumbnail   String
   url         String
   teacher     String
   duration    String
-  views       Int
+  views       Int      @default(0)
   subjectId   String
   gradeId     String
   chapter     String
   lesson      String
-  isFree      Boolean
-  isActive    Boolean
-  createdAt   DateTime
+  isFree      Boolean  @default(true)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
   subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   grade       Grade    @relation(fields: [gradeId], references: [id], onDelete: Cascade)
 
@@ -75,18 +90,18 @@ model Video {
 }
 
 model Handout {
-  id        String   @id
+  id        String   @id @default(cuid())
   title     String
   cover     String
   fileUrl   String
   fileSize  String
   type      String
-  downloads Int
+  downloads Int      @default(0)
   subjectId String
   gradeId   String
-  isFree    Boolean
-  isActive  Boolean
-  createdAt DateTime
+  isFree    Boolean  @default(true)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
   subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   grade     Grade    @relation(fields: [gradeId], references: [id], onDelete: Cascade)
 
@@ -96,17 +111,17 @@ model Handout {
 }
 
 model Quiz {
-  id            String   @id
+  id            String   @id @default(cuid())
   title         String
   subjectId     String
   gradeId       String
   chapter       String
   duration      Int
-  questionCount Int
-  attempts      Int
+  questionCount Int      @default(0)
+  attempts      Int      @default(0)
   questions     Json
-  isActive      Boolean
-  createdAt     DateTime
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
   subject       Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   grade         Grade    @relation(fields: [gradeId], references: [id], onDelete: Cascade)
 
@@ -121,16 +136,40 @@ model Teacher {
   avatar     String
   subject    String
   bio        String
-  videoCount Int
+  videoCount Int    @default(0)
 }
 
 model Notification {
-  id        String   @id
+  id        String   @id @default(cuid())
   title     String
   message   String
   type      String
-  createdAt DateTime
+  audience  String   @default("all")
+  createdAt DateTime @default(now())
   isRead    Boolean  @default(false)
 
   @@index([createdAt])
+}
+
+model Banner {
+  id        String   @id @default(cuid())
+  title     String
+  subtitle  String
+  imageUrl  String
+  linkUrl   String
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([isActive, sortOrder])
+}
+
+model SiteSetting {
+  id                String   @id
+  siteName          String
+  siteDescription   String
+  telegramHandle    String
+  maintenanceMode   Boolean  @default(false)
+  allowRegistration Boolean  @default(true)
+  updatedAt         DateTime @updatedAt
 }

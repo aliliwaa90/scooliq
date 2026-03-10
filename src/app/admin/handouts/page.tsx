@@ -1,117 +1,241 @@
 'use client';
 
-import Link from 'next/link';
+import { useMemo, useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 import { useCatalog } from '@/components/catalog-provider';
-import { useState } from 'react';
-import { AdminSidebar, AdminMobileNav } from '../videos/page';
-import { FileText, Plus, Search, Edit, Trash2, Download, X, Save } from 'lucide-react';
+import { AdminShell } from '@/components/admin/admin-shell';
+import {
+  Download,
+  Eye,
+  EyeOff,
+  FileText,
+  Plus,
+  Save,
+  Search,
+  Trash2,
+  X,
+} from 'lucide-react';
 
-export default function AdminHandouts() {
-  const { handouts, subjects, grades } = useCatalog();
+const initialForm = {
+  title: '',
+  fileUrl: '',
+  fileSize: '',
+  cover: '',
+  subjectId: '',
+  type: 'handout',
+  isFree: true,
+  isActive: true,
+};
+
+const typeLabels: Record<string, string> = {
+  handout: 'ملزمة',
+  book: 'كتاب',
+  summary: 'ملخص',
+};
+
+export default function AdminHandoutsPage() {
+  const router = useRouter();
+  const { handouts, subjects } = useCatalog();
   const [showForm, setShowForm] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const filtered = handouts.filter(h => h.title.includes(searchQuery));
-  const typeLabels: Record<string, string> = { handout: 'ملزمة', book: 'كتاب', summary: 'ملخص' };
+  const [form, setForm] = useState(initialForm);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [isPending, startTransition] = useTransition();
+
+  const filteredHandouts = useMemo(
+    () =>
+      handouts.filter((handout) =>
+        [handout.title, handout.fileSize, typeLabels[handout.type]]
+          .join(' ')
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()),
+      ),
+    [handouts, searchQuery],
+  );
+
+  function updateField<Key extends keyof typeof form>(key: Key, value: (typeof form)[Key]) {
+    setForm((current) => ({ ...current, [key]: value }));
+  }
+
+  async function handleCreate(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError('');
+    setSuccess('');
+
+    const response = await fetch('/api/admin/handouts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form),
+    });
+
+    const payload = await response.json().catch(() => null);
+
+    if (!response.ok) {
+      setError(payload?.message ?? 'تعذر حفظ الملف.');
+      return;
+    }
+
+    setForm(initialForm);
+    setShowForm(false);
+    setSuccess('تم حفظ الملف في قاعدة البيانات.');
+    startTransition(() => {
+      router.refresh();
+    });
+  }
+
+  async function runAction(id: string, action: 'toggle-active' | 'delete') {
+    setError('');
+    setSuccess('');
+
+    if (action === 'delete' && !window.confirm('سيتم حذف الملف نهائياً. هل تريد المتابعة؟')) {
+      return;
+    }
+
+    const response = await fetch(`/api/admin/handouts/${id}`, {
+      method: action === 'delete' ? 'DELETE' : 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: action === 'delete' ? undefined : JSON.stringify({ action }),
+    });
+
+    const payload = await response.json().catch(() => null);
+
+    if (!response.ok) {
+      setError(payload?.message ?? 'تعذر تنفيذ الإجراء.');
+      return;
+    }
+
+    setSuccess(action === 'delete' ? 'تم حذف الملف.' : 'تم تحديث حالة الملف.');
+    startTransition(() => {
+      router.refresh();
+    });
+  }
 
   return (
-    <div className="min-h-screen flex">
-      <AdminSidebar active="handouts" />
+    <AdminShell
+      active="handouts"
+      title="إدارة الملفات والكتب"
+      subtitle={`${handouts.length} ملف مرتبط فعلياً بقاعدة البيانات.`}
+      actions={
+        <button type="button" onClick={() => setShowForm((value) => !value)} className="btn-primary text-sm">
+          <Plus size={16} />
+          {showForm ? 'إغلاق النموذج' : 'إضافة ملف'}
+        </button>
+      }
+    >
+      {error ? <div className="mb-4 rounded-2xl border border-error/20 bg-error/10 px-4 py-3 text-sm text-error">{error}</div> : null}
+      {success ? <div className="mb-4 rounded-2xl border border-success/20 bg-success/10 px-4 py-3 text-sm text-success">{success}</div> : null}
 
-      <main className="flex-1 p-4 md:p-6 mt-14 md:mt-0 mb-20 md:mb-0">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
-            <div>
-              <h1 className="text-xl font-bold">إدارة الملازم والكتب</h1>
-              <p className="text-sm text-muted">{handouts.length} ملف</p>
-            </div>
-            <button onClick={() => setShowForm(!showForm)} className="btn-primary text-sm">
-              <Plus size={16} />
-              إضافة ملف
+      {showForm ? (
+        <form onSubmit={handleCreate} className="card mb-6 p-5">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="font-bold">ملف جديد</h2>
+            <button type="button" onClick={() => setShowForm(false)} className="text-muted">
+              <X size={18} />
             </button>
           </div>
 
-          {showForm && (
-            <div className="card p-5 mb-6 fade-in">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold">إضافة ملف جديد</h3>
-                <button onClick={() => setShowForm(false)}><X size={18} className="text-muted" /></button>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <input placeholder="عنوان الملف" className="input-field text-sm" />
-                <select className="input-field text-sm">
-                  <option value="">نوع الملف</option>
-                  <option value="handout">ملزمة</option>
-                  <option value="book">كتاب</option>
-                  <option value="summary">ملخص</option>
-                </select>
-                <select className="input-field text-sm">
-                  <option value="">اختر المادة</option>
-                  {subjects.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
-                </select>
-                <div className="flex flex-col gap-1">
-                  <label className="text-xs text-muted font-semibold">ملف PDF</label>
-                  <input type="file" accept=".pdf" className="input-field text-sm" />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <label className="text-xs text-muted font-semibold">صورة الغلاف</label>
-                  <input type="file" accept="image/*" className="input-field text-sm" />
-                </div>
-              </div>
-              <button className="btn-primary mt-3 text-sm"><Save size={14} />حفظ</button>
-            </div>
-          )}
-
-          <div className="relative mb-4">
-            <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted" />
-            <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="ابحث..." className="input-field text-sm pr-9" />
+          <div className="grid gap-3 md:grid-cols-2">
+            <input className="input-field text-sm" placeholder="عنوان الملف" value={form.title} onChange={(event) => updateField('title', event.target.value)} />
+            <select className="input-field text-sm" value={form.type} onChange={(event) => updateField('type', event.target.value)}>
+              <option value="handout">ملزمة</option>
+              <option value="book">كتاب</option>
+              <option value="summary">ملخص</option>
+            </select>
+            <select className="input-field text-sm" value={form.subjectId} onChange={(event) => updateField('subjectId', event.target.value)}>
+              <option value="">اختر المادة</option>
+              {subjects.map((subject) => (
+                <option key={subject.id} value={subject.id}>
+                  {subject.name}
+                </option>
+              ))}
+            </select>
+            <input className="input-field text-sm" placeholder="حجم الملف مثال 2.4 MB" value={form.fileSize} onChange={(event) => updateField('fileSize', event.target.value)} />
+            <input className="input-field text-sm" placeholder="رابط الملف PDF" value={form.fileUrl} onChange={(event) => updateField('fileUrl', event.target.value)} dir="ltr" />
+            <input className="input-field text-sm" placeholder="رابط صورة الغلاف" value={form.cover} onChange={(event) => updateField('cover', event.target.value)} dir="ltr" />
           </div>
 
-          <div className="card overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="surface-elevated text-right">
-                    <th className="p-3 font-semibold text-muted">#</th>
-                    <th className="p-3 font-semibold text-muted">العنوان</th>
-                    <th className="p-3 font-semibold text-muted hidden md:table-cell">النوع</th>
-                    <th className="p-3 font-semibold text-muted hidden md:table-cell">المادة</th>
-                    <th className="p-3 font-semibold text-muted hidden md:table-cell">الحجم</th>
-                    <th className="p-3 font-semibold text-muted hidden md:table-cell">التحميلات</th>
-                    <th className="p-3 font-semibold text-muted">إجراءات</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.map((h, i) => {
-                    const subj = subjects.find(s => s.id === h.subjectId);
-                    return (
-                      <tr key={h.id} className="border-t border-theme hover:surface-elevated transition-all">
-                        <td className="p-3 text-muted">{i + 1}</td>
-                        <td className="p-3">
-                          <p className="font-semibold truncate max-w-[200px]">{h.title}</p>
-                        </td>
-                        <td className="p-3 hidden md:table-cell">
-                          <span className="badge badge-accent text-[10px]">{typeLabels[h.type]}</span>
-                        </td>
-                        <td className="p-3 hidden md:table-cell"><span className="badge badge-primary text-[10px]">{subj?.name}</span></td>
-                        <td className="p-3 hidden md:table-cell text-muted">{h.fileSize}</td>
-                        <td className="p-3 hidden md:table-cell text-muted">{h.downloads.toLocaleString('ar-EG')}</td>
-                        <td className="p-3">
-                          <div className="flex items-center gap-1">
-                            <button className="w-7 h-7 rounded-lg surface-elevated flex items-center justify-center hover:text-primary transition-all"><Edit size={13} /></button>
-                            <button className="w-7 h-7 rounded-lg surface-elevated flex items-center justify-center hover:text-error transition-all"><Trash2 size={13} /></button>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+          <div className="mt-3 flex flex-wrap items-center gap-4">
+            <label className="flex items-center gap-2 text-sm font-semibold">
+              <input type="checkbox" checked={form.isFree} onChange={(event) => updateField('isFree', event.target.checked)} className="h-4 w-4 accent-primary" />
+              مجاني
+            </label>
+            <label className="flex items-center gap-2 text-sm font-semibold">
+              <input type="checkbox" checked={form.isActive} onChange={(event) => updateField('isActive', event.target.checked)} className="h-4 w-4 accent-primary" />
+              ظاهر في المنصة
+            </label>
           </div>
 
-          <AdminMobileNav active="handouts" />
-        </div>
-      </main>
-    </div>
+          <button type="submit" disabled={isPending} className="btn-primary mt-4 text-sm">
+            <Save size={15} />
+            {isPending ? 'جار الحفظ...' : 'حفظ الملف'}
+          </button>
+        </form>
+      ) : null}
+
+      <div className="relative mb-4">
+        <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted" />
+        <input
+          className="input-field pr-9 text-sm"
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+          placeholder="ابحث عن ملف أو نوع أو حجم..."
+        />
+      </div>
+
+      <div className="grid gap-3">
+        {filteredHandouts.map((handout) => {
+          const subject = subjects.find((item) => item.id === handout.subjectId);
+          return (
+            <div key={handout.id} className="card p-4">
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-success/10 text-success">
+                  <FileText size={22} />
+                </div>
+
+                <div className="min-w-0 flex-1">
+                  <div className="mb-1 flex flex-wrap items-center gap-2">
+                    <h3 className="font-bold">{handout.title}</h3>
+                    <span className="badge badge-primary text-[10px]">{typeLabels[handout.type]}</span>
+                    <span className={`badge text-[10px] ${handout.isActive ? 'badge-success' : 'badge-primary'}`}>
+                      {handout.isActive ? 'ظاهر' : 'مخفي'}
+                    </span>
+                  </div>
+                  <p className="text-sm text-muted">{subject?.name ?? 'بدون مادة'} • {handout.fileSize}</p>
+                  <div className="mt-2 flex items-center gap-3 text-xs text-muted">
+                    <span className="flex items-center gap-1">
+                      <Download size={12} />
+                      {handout.downloads.toLocaleString('ar-EG')}
+                    </span>
+                    <span>{handout.createdAt}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => runAction(handout.id, 'toggle-active')}
+                    className="flex h-8 w-8 items-center justify-center rounded-xl surface-elevated transition-all hover:text-primary"
+                  >
+                    {handout.isActive ? <EyeOff size={14} /> : <Eye size={14} />}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => runAction(handout.id, 'delete')}
+                    className="flex h-8 w-8 items-center justify-center rounded-xl surface-elevated transition-all hover:text-error"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </AdminShell>
   );
 }

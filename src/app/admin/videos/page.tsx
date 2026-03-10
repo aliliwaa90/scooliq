@@ -1,211 +1,257 @@
 'use client';
 
+import { useMemo, useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 import { useCatalog } from '@/components/catalog-provider';
-import Link from 'next/link';
-import { useState } from 'react';
+import { AdminShell } from '@/components/admin/admin-shell';
 import {
-  ArrowRight, Video, Plus, Search, Edit, Trash2, Eye, EyeOff,
-  LayoutDashboard, Users, FileText, BookOpen, ClipboardList, Bell,
-  Image, Settings, Home, X, Save
+  Eye,
+  EyeOff,
+  Plus,
+  Save,
+  Search,
+  Trash2,
+  Video,
+  X,
 } from 'lucide-react';
 
-export default function AdminVideos() {
+const initialForm = {
+  title: '',
+  url: '',
+  teacher: '',
+  duration: '',
+  subjectId: '',
+  chapter: '',
+  lesson: '',
+  description: '',
+  thumbnail: '',
+  isFree: true,
+  isActive: true,
+};
+
+export default function AdminVideosPage() {
+  const router = useRouter();
   const { videos, subjects, grades } = useCatalog();
   const [showForm, setShowForm] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const filtered = videos.filter(v => v.title.includes(searchQuery) || v.teacher.includes(searchQuery));
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [form, setForm] = useState(initialForm);
+  const [isPending, startTransition] = useTransition();
+
+  const filteredVideos = useMemo(
+    () =>
+      videos.filter((video) =>
+        [video.title, video.teacher, video.chapter, video.lesson]
+          .join(' ')
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()),
+      ),
+    [searchQuery, videos],
+  );
+
+  function updateField<Key extends keyof typeof form>(key: Key, value: (typeof form)[Key]) {
+    setForm((current) => ({
+      ...current,
+      [key]: value,
+    }));
+  }
+
+  async function handleCreate(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError('');
+    setSuccess('');
+
+    const response = await fetch('/api/admin/videos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form),
+    });
+
+    const payload = await response.json().catch(() => null);
+
+    if (!response.ok) {
+      setError(payload?.message ?? 'تعذر حفظ الفيديو.');
+      return;
+    }
+
+    setForm(initialForm);
+    setShowForm(false);
+    setSuccess('تم حفظ الفيديو وربطه بقاعدة البيانات.');
+    startTransition(() => {
+      router.refresh();
+    });
+  }
+
+  async function runAction(id: string, action: 'toggle-active' | 'delete') {
+    setError('');
+    setSuccess('');
+
+    if (action === 'delete' && !window.confirm('سيتم حذف الفيديو نهائياً. هل تريد المتابعة؟')) {
+      return;
+    }
+
+    const response = await fetch(`/api/admin/videos/${id}`, {
+      method: action === 'delete' ? 'DELETE' : 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: action === 'delete' ? undefined : JSON.stringify({ action }),
+    });
+
+    const payload = await response.json().catch(() => null);
+
+    if (!response.ok) {
+      setError(payload?.message ?? 'تعذر تنفيذ الإجراء.');
+      return;
+    }
+
+    setSuccess(action === 'delete' ? 'تم حذف الفيديو.' : 'تم تحديث حالة الفيديو.');
+    startTransition(() => {
+      router.refresh();
+    });
+  }
 
   return (
-    <div className="min-h-screen flex">
-      {/* Sidebar */}
-      <AdminSidebar active="videos" />
+    <AdminShell
+      active="videos"
+      title="إدارة الفيديوهات"
+      subtitle={`${videos.length} فيديو محفوظ فعلياً في قاعدة البيانات.`}
+      actions={
+        <button type="button" onClick={() => setShowForm((value) => !value)} className="btn-primary text-sm">
+          <Plus size={16} />
+          {showForm ? 'إغلاق النموذج' : 'إضافة فيديو'}
+        </button>
+      }
+    >
+      {error ? <div className="mb-4 rounded-2xl border border-error/20 bg-error/10 px-4 py-3 text-sm text-error">{error}</div> : null}
+      {success ? <div className="mb-4 rounded-2xl border border-success/20 bg-success/10 px-4 py-3 text-sm text-success">{success}</div> : null}
 
-      <main className="flex-1 p-4 md:p-6 mt-14 md:mt-0">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
-            <div>
-              <h1 className="text-xl font-bold">إدارة الفيديوهات</h1>
-              <p className="text-sm text-muted">{videos.length} فيديو</p>
-            </div>
-            <button onClick={() => setShowForm(!showForm)} className="btn-primary text-sm">
-              <Plus size={16} />
-              إضافة فيديو
+      {showForm ? (
+        <form onSubmit={handleCreate} className="card mb-6 p-5">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="font-bold">فيديو جديد</h2>
+            <button type="button" onClick={() => setShowForm(false)} className="text-muted">
+              <X size={18} />
             </button>
           </div>
 
-          {/* Add Form */}
-          {showForm && (
-            <div className="card p-5 mb-6 fade-in">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold">إضافة فيديو جديد</h3>
-                <button onClick={() => setShowForm(false)}><X size={18} className="text-muted" /></button>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <input placeholder="عنوان الفيديو" className="input-field text-sm" />
-                <input placeholder="رابط الفيديو (YouTube)" className="input-field text-sm" dir="ltr" style={{ textAlign: 'right' }} />
-                <input placeholder="اسم المدرس" className="input-field text-sm" />
-                <input placeholder="المدة (مثال: 30:00)" className="input-field text-sm" />
-                <select className="input-field text-sm">
-                  <option value="">اختر المادة</option>
-                  {subjects.map(s => <option key={s.id} value={s.id}>{s.name} - {grades.find(g => g.id === s.gradeId)?.name}</option>)}
-                </select>
-                <input placeholder="الفصل / الوحدة" className="input-field text-sm" />
-                <input placeholder="الدرس" className="input-field text-sm" />
-                <div className="flex items-center gap-3">
-                  <label className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" defaultChecked className="w-4 h-4 accent-primary" />
-                    مجاني
-                  </label>
-                  <label className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" defaultChecked className="w-4 h-4 accent-primary" />
-                    فعّال
-                  </label>
-                </div>
-              </div>
-              <textarea placeholder="وصف الفيديو" className="input-field text-sm mt-3 min-h-[80px] resize-none" />
-              <button className="btn-primary mt-3 text-sm"><Save size={14} />حفظ</button>
-            </div>
-          )}
-
-          {/* Search */}
-          <div className="relative mb-4">
-            <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted" />
-            <input
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              placeholder="ابحث في الفيديوهات..."
-              className="input-field text-sm pr-9"
-            />
+          <div className="grid gap-3 md:grid-cols-2">
+            <input className="input-field text-sm" placeholder="عنوان الفيديو" value={form.title} onChange={(event) => updateField('title', event.target.value)} />
+            <input className="input-field text-sm" placeholder="رابط الفيديو" value={form.url} onChange={(event) => updateField('url', event.target.value)} dir="ltr" />
+            <input className="input-field text-sm" placeholder="اسم المدرس" value={form.teacher} onChange={(event) => updateField('teacher', event.target.value)} />
+            <input className="input-field text-sm" placeholder="المدة مثال 25:30" value={form.duration} onChange={(event) => updateField('duration', event.target.value)} />
+            <select className="input-field text-sm" value={form.subjectId} onChange={(event) => updateField('subjectId', event.target.value)}>
+              <option value="">اختر المادة</option>
+              {subjects.map((subject) => (
+                <option key={subject.id} value={subject.id}>
+                  {subject.name} - {grades.find((grade) => grade.id === subject.gradeId)?.name}
+                </option>
+              ))}
+            </select>
+            <input className="input-field text-sm" placeholder="الفصل أو الوحدة" value={form.chapter} onChange={(event) => updateField('chapter', event.target.value)} />
+            <input className="input-field text-sm" placeholder="الدرس" value={form.lesson} onChange={(event) => updateField('lesson', event.target.value)} />
+            <input className="input-field text-sm" placeholder="رابط الصورة المصغرة" value={form.thumbnail} onChange={(event) => updateField('thumbnail', event.target.value)} dir="ltr" />
           </div>
 
-          {/* Table */}
-          <div className="card overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="surface-elevated text-right">
-                    <th className="p-3 font-semibold text-muted">#</th>
-                    <th className="p-3 font-semibold text-muted">العنوان</th>
-                    <th className="p-3 font-semibold text-muted hidden md:table-cell">المدرس</th>
-                    <th className="p-3 font-semibold text-muted hidden md:table-cell">المادة</th>
-                    <th className="p-3 font-semibold text-muted hidden md:table-cell">المشاهدات</th>
-                    <th className="p-3 font-semibold text-muted">الحالة</th>
-                    <th className="p-3 font-semibold text-muted">إجراءات</th>
+          <textarea className="input-field mt-3 min-h-[90px] resize-none text-sm" placeholder="وصف الفيديو" value={form.description} onChange={(event) => updateField('description', event.target.value)} />
+
+          <div className="mt-3 flex flex-wrap items-center gap-4">
+            <label className="flex items-center gap-2 text-sm font-semibold">
+              <input type="checkbox" checked={form.isFree} onChange={(event) => updateField('isFree', event.target.checked)} className="h-4 w-4 accent-primary" />
+              مجاني
+            </label>
+            <label className="flex items-center gap-2 text-sm font-semibold">
+              <input type="checkbox" checked={form.isActive} onChange={(event) => updateField('isActive', event.target.checked)} className="h-4 w-4 accent-primary" />
+              ظاهر في المنصة
+            </label>
+          </div>
+
+          <button type="submit" disabled={isPending} className="btn-primary mt-4 text-sm">
+            <Save size={15} />
+            {isPending ? 'جار الحفظ...' : 'حفظ الفيديو'}
+          </button>
+        </form>
+      ) : null}
+
+      <div className="relative mb-4">
+        <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted" />
+        <input
+          className="input-field pr-9 text-sm"
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+          placeholder="ابحث عن فيديو أو مدرس أو فصل..."
+        />
+      </div>
+
+      <div className="card overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="surface-elevated text-right">
+                <th className="p-3 text-muted">الفيديو</th>
+                <th className="p-3 text-muted hidden md:table-cell">المادة</th>
+                <th className="p-3 text-muted hidden md:table-cell">المدرس</th>
+                <th className="p-3 text-muted hidden md:table-cell">المشاهدات</th>
+                <th className="p-3 text-muted">الحالة</th>
+                <th className="p-3 text-muted">إجراءات</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredVideos.map((video) => {
+                const subject = subjects.find((item) => item.id === video.subjectId);
+                return (
+                  <tr key={video.id} className="border-t border-theme">
+                    <td className="p-3">
+                      <div className="flex items-start gap-3">
+                        <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                          <Video size={18} />
+                        </div>
+                        <div>
+                          <p className="font-bold">{video.title}</p>
+                          <p className="text-xs text-muted">{video.chapter} - {video.lesson}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-3 hidden md:table-cell">
+                      <span className="badge badge-primary text-[10px]">{subject?.name ?? 'غير معروف'}</span>
+                    </td>
+                    <td className="p-3 hidden md:table-cell text-muted">{video.teacher}</td>
+                    <td className="p-3 hidden md:table-cell text-muted">{video.views.toLocaleString('ar-EG')}</td>
+                    <td className="p-3">
+                      <span className={`badge text-[10px] ${video.isActive ? 'badge-success' : 'badge-primary'}`}>
+                        {video.isActive ? 'ظاهر' : 'مخفي'}
+                      </span>
+                    </td>
+                    <td className="p-3">
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => runAction(video.id, 'toggle-active')}
+                          className="flex h-8 w-8 items-center justify-center rounded-xl surface-elevated transition-all hover:text-primary"
+                          title={video.isActive ? 'إخفاء' : 'إظهار'}
+                        >
+                          {video.isActive ? <EyeOff size={14} /> : <Eye size={14} />}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => runAction(video.id, 'delete')}
+                          className="flex h-8 w-8 items-center justify-center rounded-xl surface-elevated transition-all hover:text-error"
+                          title="حذف"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {filtered.map((v, i) => {
-                    const subj = subjects.find(s => s.id === v.subjectId);
-                    return (
-                      <tr key={v.id} className="border-t border-theme hover:surface-elevated transition-all">
-                        <td className="p-3 text-muted">{i + 1}</td>
-                        <td className="p-3">
-                          <p className="font-semibold truncate max-w-[200px]">{v.title}</p>
-                          <p className="text-xs text-muted md:hidden">{v.teacher}</p>
-                        </td>
-                        <td className="p-3 hidden md:table-cell text-muted">{v.teacher}</td>
-                        <td className="p-3 hidden md:table-cell"><span className="badge badge-primary text-[10px]">{subj?.name}</span></td>
-                        <td className="p-3 hidden md:table-cell text-muted">{v.views.toLocaleString('ar-EG')}</td>
-                        <td className="p-3">
-                          {v.isActive ? (
-                            <span className="badge badge-success text-[10px]">فعّال</span>
-                          ) : (
-                            <span className="badge bg-error/10 text-error text-[10px]">معطّل</span>
-                          )}
-                        </td>
-                        <td className="p-3">
-                          <div className="flex items-center gap-1">
-                            <button className="w-7 h-7 rounded-lg surface-elevated flex items-center justify-center hover:text-primary transition-all"><Edit size={13} /></button>
-                            <button className="w-7 h-7 rounded-lg surface-elevated flex items-center justify-center hover:text-error transition-all"><Trash2 size={13} /></button>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Mobile Bottom Nav */}
-          <AdminMobileNav active="videos" />
+                );
+              })}
+            </tbody>
+          </table>
         </div>
-      </main>
-    </div>
-  );
-}
-
-// ===== SHARED ADMIN COMPONENTS =====
-
-export function AdminSidebar({ active }: { active: string }) {
-  const items = [
-    { id: 'dashboard', icon: <LayoutDashboard size={18} />, label: 'لوحة التحكم', href: '/admin' },
-    { id: 'users', icon: <Users size={18} />, label: 'المستخدمين', href: '/admin/users' },
-    { id: 'videos', icon: <Video size={18} />, label: 'الفيديوهات', href: '/admin/videos' },
-    { id: 'handouts', icon: <FileText size={18} />, label: 'الملازم', href: '/admin/handouts' },
-    { id: 'books', icon: <BookOpen size={18} />, label: 'الكتب', href: '/admin/books' },
-    { id: 'quizzes', icon: <ClipboardList size={18} />, label: 'الاختبارات', href: '/admin/quizzes' },
-    { id: 'notifications', icon: <Bell size={18} />, label: 'الإشعارات', href: '/admin/notifications' },
-    { id: 'banners', icon: <Image size={18} />, label: 'البانرات', href: '/admin/banners' },
-    { id: 'settings', icon: <Settings size={18} />, label: 'الإعدادات', href: '/admin/settings' },
-    { id: 'home', icon: <Home size={18} />, label: 'المنصة', href: '/' },
-  ];
-
-  return (
-    <>
-      <aside className="w-64 min-h-screen surface border-l border-theme p-4 hidden md:block sticky top-0">
-        <div className="flex items-center gap-2 mb-6">
-          <div className="w-9 h-9 rounded-xl gradient-hero flex items-center justify-center text-white font-bold text-sm">ح</div>
-          <div>
-            <p className="font-bold text-sm">لوحة التحكم</p>
-            <p className="text-[10px] text-muted">حقيبة الطالب العراقي</p>
-          </div>
-        </div>
-        <nav className="space-y-1">
-          {items.map((item) => (
-            <Link
-              key={item.id}
-              href={item.href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                active === item.id ? 'bg-primary text-white' : 'text-muted hover:surface-elevated hover:text-primary'
-              }`}
-            >
-              {item.icon}
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-      </aside>
-
-      {/* Mobile Header */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-50 glass p-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg gradient-hero flex items-center justify-center text-white font-bold text-xs">ح</div>
-          <span className="font-bold text-sm">لوحة التحكم</span>
-        </div>
-        <Link href="/" className="text-xs text-primary font-semibold">المنصة</Link>
       </div>
-    </>
-  );
-}
-
-export function AdminMobileNav({ active }: { active: string }) {
-  return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 glass border-t border-theme p-2 z-50">
-      <div className="flex justify-around">
-        {[
-          { id: 'dashboard', icon: <LayoutDashboard size={20} />, label: 'الرئيسية', href: '/admin' },
-          { id: 'videos', icon: <Video size={20} />, label: 'فيديوهات', href: '/admin/videos' },
-          { id: 'handouts', icon: <FileText size={20} />, label: 'ملازم', href: '/admin/handouts' },
-          { id: 'users', icon: <Users size={20} />, label: 'مستخدمين', href: '/admin/users' },
-          { id: 'settings', icon: <Settings size={20} />, label: 'إعدادات', href: '/admin/settings' },
-        ].map((item) => (
-          <Link key={item.id} href={item.href} className={`flex flex-col items-center gap-0.5 p-1.5 rounded-xl ${active === item.id ? 'text-primary' : 'text-muted'}`}>
-            {item.icon}
-            <span className="text-[9px] font-semibold">{item.label}</span>
-          </Link>
-        ))}
-      </div>
-    </div>
+    </AdminShell>
   );
 }

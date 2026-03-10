@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums"
-import type * as Prisma from "../internal/prismaNamespace"
+import type * as $Enums from "../enums.ts"
+import type * as Prisma from "../internal/prismaNamespace.ts"
 
 /**
  * Model Video
@@ -388,39 +388,39 @@ export type VideoScalarWhereWithAggregatesInput = {
 }
 
 export type VideoCreateInput = {
-  id: string
+  id?: string
   title: string
   description: string
   thumbnail: string
   url: string
   teacher: string
   duration: string
-  views: number
+  views?: number
   chapter: string
   lesson: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
   subject: Prisma.SubjectCreateNestedOneWithoutVideosInput
   grade: Prisma.GradeCreateNestedOneWithoutVideosInput
 }
 
 export type VideoUncheckedCreateInput = {
-  id: string
+  id?: string
   title: string
   description: string
   thumbnail: string
   url: string
   teacher: string
   duration: string
-  views: number
+  views?: number
   subjectId: string
   gradeId: string
   chapter: string
   lesson: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type VideoUpdateInput = {
@@ -460,21 +460,21 @@ export type VideoUncheckedUpdateInput = {
 }
 
 export type VideoCreateManyInput = {
-  id: string
+  id?: string
   title: string
   description: string
   thumbnail: string
   url: string
   teacher: string
   duration: string
-  views: number
+  views?: number
   subjectId: string
   gradeId: string
   chapter: string
   lesson: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type VideoUpdateManyMutationInput = {
@@ -668,37 +668,37 @@ export type VideoUncheckedUpdateManyWithoutSubjectNestedInput = {
 }
 
 export type VideoCreateWithoutGradeInput = {
-  id: string
+  id?: string
   title: string
   description: string
   thumbnail: string
   url: string
   teacher: string
   duration: string
-  views: number
+  views?: number
   chapter: string
   lesson: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
   subject: Prisma.SubjectCreateNestedOneWithoutVideosInput
 }
 
 export type VideoUncheckedCreateWithoutGradeInput = {
-  id: string
+  id?: string
   title: string
   description: string
   thumbnail: string
   url: string
   teacher: string
   duration: string
-  views: number
+  views?: number
   subjectId: string
   chapter: string
   lesson: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type VideoCreateOrConnectWithoutGradeInput = {
@@ -749,37 +749,37 @@ export type VideoScalarWhereInput = {
 }
 
 export type VideoCreateWithoutSubjectInput = {
-  id: string
+  id?: string
   title: string
   description: string
   thumbnail: string
   url: string
   teacher: string
   duration: string
-  views: number
+  views?: number
   chapter: string
   lesson: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
   grade: Prisma.GradeCreateNestedOneWithoutVideosInput
 }
 
 export type VideoUncheckedCreateWithoutSubjectInput = {
-  id: string
+  id?: string
   title: string
   description: string
   thumbnail: string
   url: string
   teacher: string
   duration: string
-  views: number
+  views?: number
   gradeId: string
   chapter: string
   lesson: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type VideoCreateOrConnectWithoutSubjectInput = {
@@ -809,20 +809,20 @@ export type VideoUpdateManyWithWhereWithoutSubjectInput = {
 }
 
 export type VideoCreateManyGradeInput = {
-  id: string
+  id?: string
   title: string
   description: string
   thumbnail: string
   url: string
   teacher: string
   duration: string
-  views: number
+  views?: number
   subjectId: string
   chapter: string
   lesson: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type VideoUpdateWithoutGradeInput = {
@@ -877,20 +877,20 @@ export type VideoUncheckedUpdateManyWithoutGradeInput = {
 }
 
 export type VideoCreateManySubjectInput = {
-  id: string
+  id?: string
   title: string
   description: string
   thumbnail: string
   url: string
   teacher: string
   duration: string
-  views: number
+  views?: number
   gradeId: string
   chapter: string
   lesson: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type VideoUpdateWithoutSubjectInput = {

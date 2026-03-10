@@ -90,8 +90,44 @@ export interface Notification {
   title: string;
   message: string;
   type: 'content' | 'quiz' | 'announcement' | 'review';
+  audience: string;
   createdAt: string;
   isRead: boolean;
+}
+
+export interface CatalogUser {
+  id: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  avatar: string;
+  stage: string;
+  grade: string;
+  province: string;
+  role: 'student' | 'admin';
+  isActive: boolean;
+  createdAt: string;
+}
+
+export interface Banner {
+  id: string;
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+  linkUrl: string;
+  isActive: boolean;
+  sortOrder: number;
+  createdAt: string;
+}
+
+export interface SiteSetting {
+  id: string;
+  siteName: string;
+  siteDescription: string;
+  telegramHandle: string;
+  maintenanceMode: boolean;
+  allowRegistration: boolean;
+  updatedAt: string;
 }
 
 // ===== GRADES =====
@@ -108,6 +144,48 @@ export const grades: Grade[] = [
   { id: 'g10', name: 'الرابع الإعدادي', stage: 'إعدادي', order: 10 },
   { id: 'g11', name: 'الخامس الإعدادي', stage: 'إعدادي', order: 11 },
   { id: 'g12', name: 'السادس الإعدادي', stage: 'إعدادي', order: 12 },
+];
+
+export const users: CatalogUser[] = [
+  {
+    id: 'u1',
+    firstName: 'أحمد',
+    lastName: 'العراقي',
+    username: 'ahmed_iq',
+    avatar: '',
+    stage: 'متوسط',
+    grade: 'g9',
+    province: 'بغداد',
+    role: 'student',
+    isActive: true,
+    createdAt: '2026-01-15',
+  },
+  {
+    id: 'u2',
+    firstName: 'سارة',
+    lastName: 'النجفية',
+    username: 'sara_najaf',
+    avatar: '',
+    stage: 'إعدادي',
+    grade: 'g12',
+    province: 'النجف',
+    role: 'student',
+    isActive: true,
+    createdAt: '2026-02-01',
+  },
+  {
+    id: 'u3',
+    firstName: 'علي',
+    lastName: 'الجبوري',
+    username: 'alifakarr',
+    avatar: '',
+    stage: 'إعدادي',
+    grade: 'g12',
+    province: 'بغداد',
+    role: 'admin',
+    isActive: true,
+    createdAt: '2026-03-10',
+  },
 ];
 
 // ===== SUBJECTS =====
@@ -202,12 +280,45 @@ export const teachers: Teacher[] = [
 
 // ===== NOTIFICATIONS =====
 export const notifications: Notification[] = [
-  { id: 'n1', title: 'فيديو جديد', message: 'تم إضافة فيديو جديد في مادة الرياضيات - حل المعادلات', type: 'content', createdAt: '2026-03-10', isRead: false },
-  { id: 'n2', title: 'اختبار جديد', message: 'اختبار جديد متاح في مادة العلوم - قوانين نيوتن', type: 'quiz', createdAt: '2026-03-09', isRead: false },
-  { id: 'n3', title: 'مراجعة مهمة', message: 'مراجعة شاملة لمادة الإنكليزي قبل الامتحان النهائي', type: 'review', createdAt: '2026-03-08', isRead: true },
-  { id: 'n4', title: 'ملزمة جديدة', message: 'تم رفع ملزمة العلوم الكاملة - الفصل الثالث', type: 'content', createdAt: '2026-03-07', isRead: true },
-  { id: 'n5', title: 'إعلان مهم', message: 'سيتم إضافة محتوى جديد للصف السادس الإعدادي قريباً', type: 'announcement', createdAt: '2026-03-06', isRead: true },
+  { id: 'n1', title: 'فيديو جديد', message: 'تم إضافة فيديو جديد في مادة الرياضيات - حل المعادلات', type: 'content', audience: 'all', createdAt: '2026-03-10', isRead: false },
+  { id: 'n2', title: 'اختبار جديد', message: 'اختبار جديد متاح في مادة العلوم - قوانين نيوتن', type: 'quiz', audience: 'third-intermediate', createdAt: '2026-03-09', isRead: false },
+  { id: 'n3', title: 'مراجعة مهمة', message: 'مراجعة شاملة لمادة الإنكليزي قبل الامتحان النهائي', type: 'review', audience: 'all', createdAt: '2026-03-08', isRead: true },
+  { id: 'n4', title: 'ملزمة جديدة', message: 'تم رفع ملزمة العلوم الكاملة - الفصل الثالث', type: 'content', audience: 'all', createdAt: '2026-03-07', isRead: true },
+  { id: 'n5', title: 'إعلان مهم', message: 'سيتم إضافة محتوى جديد للصف السادس الإعدادي قريباً', type: 'announcement', audience: 'sixth-preparatory', createdAt: '2026-03-06', isRead: true },
 ];
+
+export const banners: Banner[] = [
+  {
+    id: 'b1',
+    title: 'مراجعات مكثفة للصف الثالث المتوسط',
+    subtitle: 'فيديوهات وملخصات واختبارات جاهزة قبل الامتحانات.',
+    imageUrl: '',
+    linkUrl: '/subjects/g9',
+    isActive: true,
+    sortOrder: 1,
+    createdAt: '2026-03-10',
+  },
+  {
+    id: 'b2',
+    title: 'ملزمة مجانية في الفيزياء',
+    subtitle: 'آخر النسخ المحدثة لطلاب السادس الإعدادي.',
+    imageUrl: '',
+    linkUrl: '/handouts',
+    isActive: true,
+    sortOrder: 2,
+    createdAt: '2026-03-09',
+  },
+];
+
+export const siteSettings: SiteSetting = {
+  id: 'main',
+  siteName: 'حقيبة الطالب العراقي',
+  siteDescription: 'منصة تعليمية عراقية تجمع الفيديوهات والملخصات والاختبارات في مكان واحد.',
+  telegramHandle: '@haqeeba_bot',
+  maintenanceMode: false,
+  allowRegistration: true,
+  updatedAt: '2026-03-10',
+};
 
 // ===== STAGES META =====
 export const stages = [

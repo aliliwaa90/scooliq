@@ -1,74 +1,138 @@
 'use client';
 
-import { AdminSidebar, AdminMobileNav } from '../videos/page';
-import { useState } from 'react';
-import { Bell, Send, Plus, X } from 'lucide-react';
+import { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { useCatalog } from '@/components/catalog-provider';
+import { AdminShell } from '@/components/admin/admin-shell';
+import { Bell, Plus, Send, X } from 'lucide-react';
 
-export default function AdminNotifications() {
+const initialForm = {
+  title: '',
+  message: '',
+  type: 'announcement',
+  audience: 'all',
+};
+
+const audienceLabels: Record<string, string> = {
+  all: 'كل المستخدمين',
+  'third-intermediate': 'الثالث المتوسط',
+  'sixth-preparatory': 'السادس الإعدادي',
+};
+
+export default function AdminNotificationsPage() {
+  const router = useRouter();
+  const { notifications } = useCatalog();
   const [showForm, setShowForm] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState(initialForm);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [isPending, startTransition] = useTransition();
 
-  const history = [
-    { title: 'فيديو جديد في الرياضيات', audience: 'الكل', date: '2026-03-10' },
-    { title: 'اختبار جديد في العلوم', audience: 'الثالث المتوسط', date: '2026-03-09' },
-    { title: 'ملزمة جديدة في الإنكليزي', audience: 'الكل', date: '2026-03-08' },
-  ];
+  function updateField<Key extends keyof typeof form>(key: Key, value: (typeof form)[Key]) {
+    setForm((current) => ({ ...current, [key]: value }));
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError('');
+    setSuccess('');
+
+    const response = await fetch('/api/admin/notifications', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form),
+    });
+
+    const payload = await response.json().catch(() => null);
+
+    if (!response.ok) {
+      setError(payload?.message ?? 'تعذر إرسال الإشعار.');
+      return;
+    }
+
+    setForm(initialForm);
+    setShowForm(false);
+    setSuccess('تم حفظ الإشعار وسيظهر مباشرة في صفحة الإشعارات.');
+    startTransition(() => {
+      router.refresh();
+    });
+  }
 
   return (
-    <div className="min-h-screen flex">
-      <AdminSidebar active="notifications" />
-      <main className="flex-1 p-4 md:p-6 mt-14 md:mt-0 mb-20 md:mb-0">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-xl font-bold">إدارة الإشعارات</h1>
-            <button onClick={() => { setShowForm(!showForm); setSent(false); }} className="btn-primary text-sm"><Plus size={16} />إشعار جديد</button>
+    <AdminShell
+      active="notifications"
+      title="إدارة الإشعارات"
+      subtitle="الإشعارات المحفوظة هنا تظهر مباشرة في واجهة المستخدم."
+      actions={
+        <button type="button" onClick={() => setShowForm((value) => !value)} className="btn-primary text-sm">
+          <Plus size={16} />
+          {showForm ? 'إغلاق النموذج' : 'إشعار جديد'}
+        </button>
+      }
+    >
+      {error ? <div className="mb-4 rounded-2xl border border-error/20 bg-error/10 px-4 py-3 text-sm text-error">{error}</div> : null}
+      {success ? <div className="mb-4 rounded-2xl border border-success/20 bg-success/10 px-4 py-3 text-sm text-success">{success}</div> : null}
+
+      {showForm ? (
+        <form onSubmit={handleSubmit} className="card mb-6 p-5">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="font-bold">إشعار جديد</h2>
+            <button type="button" onClick={() => setShowForm(false)} className="text-muted">
+              <X size={18} />
+            </button>
           </div>
 
-          {showForm && (
-            <div className="card p-5 mb-6 fade-in">
-              {sent ? (
-                <div className="text-center py-6">
-                  <Send size={28} className="text-success mx-auto mb-3" />
-                  <h3 className="font-bold">تم الإرسال!</h3>
-                  <button onClick={() => setShowForm(false)} className="btn-primary mt-3 text-sm">إغلاق</button>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  <input placeholder="عنوان الإشعار" className="input-field text-sm" />
-                  <textarea placeholder="نص الإشعار..." className="input-field text-sm min-h-[80px] resize-none" />
-                  <select className="input-field text-sm">
-                    <option>جميع المستخدمين</option>
-                    <option>المرحلة المتوسطة</option>
-                    <option>المرحلة الإعدادية</option>
-                  </select>
-                  <button onClick={() => setSent(true)} className="btn-primary text-sm w-full"><Send size={14} />إرسال</button>
-                </div>
-              )}
+          <div className="space-y-3">
+            <input className="input-field text-sm" placeholder="عنوان الإشعار" value={form.title} onChange={(event) => updateField('title', event.target.value)} />
+            <textarea className="input-field min-h-[100px] resize-none text-sm" placeholder="نص الإشعار" value={form.message} onChange={(event) => updateField('message', event.target.value)} />
+            <div className="grid gap-3 md:grid-cols-2">
+              <select className="input-field text-sm" value={form.type} onChange={(event) => updateField('type', event.target.value)}>
+                <option value="announcement">إعلان</option>
+                <option value="content">محتوى جديد</option>
+                <option value="quiz">اختبار</option>
+                <option value="review">مراجعة</option>
+              </select>
+              <select className="input-field text-sm" value={form.audience} onChange={(event) => updateField('audience', event.target.value)}>
+                <option value="all">كل المستخدمين</option>
+                <option value="third-intermediate">الثالث المتوسط</option>
+                <option value="sixth-preparatory">السادس الإعدادي</option>
+              </select>
             </div>
-          )}
-
-          <div className="card overflow-hidden">
-            <h3 className="font-bold p-4 border-b border-theme">سجل الإشعارات</h3>
-            <table className="w-full text-sm">
-              <thead><tr className="surface-elevated text-right">
-                <th className="p-3 text-muted">#</th><th className="p-3 text-muted">العنوان</th>
-                <th className="p-3 text-muted">الجمهور</th><th className="p-3 text-muted">التاريخ</th>
-              </tr></thead>
-              <tbody>
-                {history.map((n, i) => (
-                  <tr key={i} className="border-t border-theme">
-                    <td className="p-3 text-muted">{i+1}</td>
-                    <td className="p-3 font-semibold">{n.title}</td>
-                    <td className="p-3"><span className="badge badge-primary text-[10px]">{n.audience}</span></td>
-                    <td className="p-3 text-muted">{n.date}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
-          <AdminMobileNav active="notifications" />
-        </div>
-      </main>
-    </div>
+
+          <button type="submit" disabled={isPending} className="btn-primary mt-4 text-sm">
+            <Send size={15} />
+            {isPending ? 'جار الإرسال...' : 'حفظ الإشعار'}
+          </button>
+        </form>
+      ) : null}
+
+      <div className="grid gap-3">
+        {notifications.map((notification) => (
+          <div key={notification.id} className="card p-4">
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-error/10 text-error">
+                <Bell size={18} />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="mb-1 flex flex-wrap items-center gap-2">
+                  <h3 className="font-bold">{notification.title}</h3>
+                  <span className="badge badge-primary text-[10px]">
+                    {audienceLabels[notification.audience] ?? notification.audience}
+                  </span>
+                </div>
+                <p className="text-sm text-muted">{notification.message}</p>
+                <div className="mt-2 flex items-center gap-3 text-xs text-muted">
+                  <span>{notification.createdAt}</span>
+                  <span>{notification.type}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </AdminShell>
   );
 }

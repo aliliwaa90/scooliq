@@ -1,58 +1,113 @@
 'use client';
 
-import { AdminSidebar, AdminMobileNav } from '../videos/page';
-import { Save, Globe, Shield, Palette } from 'lucide-react';
+import { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { useCatalog } from '@/components/catalog-provider';
+import { AdminShell } from '@/components/admin/admin-shell';
+import { Globe, Save, Shield } from 'lucide-react';
 
-export default function AdminSettings() {
+export default function AdminSettingsPage() {
+  const router = useRouter();
+  const { siteSettings } = useCatalog();
+  const [form, setForm] = useState({
+    siteName: siteSettings.siteName,
+    siteDescription: siteSettings.siteDescription,
+    telegramHandle: siteSettings.telegramHandle,
+    maintenanceMode: siteSettings.maintenanceMode,
+    allowRegistration: siteSettings.allowRegistration,
+  });
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [isPending, startTransition] = useTransition();
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError('');
+    setSuccess('');
+
+    const response = await fetch('/api/admin/settings', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form),
+    });
+
+    const payload = await response.json().catch(() => null);
+
+    if (!response.ok) {
+      setError(payload?.message ?? 'تعذر حفظ الإعدادات.');
+      return;
+    }
+
+    setSuccess('تم تحديث إعدادات المنصة.');
+    startTransition(() => {
+      router.refresh();
+    });
+  }
+
   return (
-    <div className="min-h-screen flex">
-      <AdminSidebar active="settings" />
-      <main className="flex-1 p-4 md:p-6 mt-14 md:mt-0 mb-20 md:mb-0">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-xl font-bold mb-6">إعدادات المنصة</h1>
+    <AdminShell
+      active="settings"
+      title="إعدادات المنصة"
+      subtitle="هذه القيم مرتبطة فعلياً بالصفحة الرئيسية ولوحة التحكم."
+    >
+      {error ? <div className="mb-4 rounded-2xl border border-error/20 bg-error/10 px-4 py-3 text-sm text-error">{error}</div> : null}
+      {success ? <div className="mb-4 rounded-2xl border border-success/20 bg-success/10 px-4 py-3 text-sm text-success">{success}</div> : null}
 
-          <div className="space-y-4">
-            <div className="card p-5 fade-in">
-              <div className="flex items-center gap-2 mb-4">
-                <Globe size={18} className="text-primary" />
-                <h3 className="font-bold">معلومات المنصة</h3>
-              </div>
-              <div className="space-y-3">
-                <div><label className="text-xs text-muted font-semibold block mb-1">اسم المنصة</label>
-                <input defaultValue="حقيبة الطالب العراقي" className="input-field text-sm" /></div>
-                <div><label className="text-xs text-muted font-semibold block mb-1">الوصف</label>
-                <textarea defaultValue="منصة تعليمية شاملة للطلاب العراقيين" className="input-field text-sm min-h-[60px] resize-none" /></div>
-                <div><label className="text-xs text-muted font-semibold block mb-1">رابط تيليجرام</label>
-                <input defaultValue="@haqeeba_bot" className="input-field text-sm" /></div>
-              </div>
-            </div>
-
-            <div className="card p-5 fade-in" style={{ animationDelay: '0.1s' }}>
-              <div className="flex items-center gap-2 mb-4">
-                <Shield size={18} className="text-success" />
-                <h3 className="font-bold">إعدادات النظام</h3>
-              </div>
-              <div className="space-y-3">
-                <label className="flex items-center justify-between p-3 rounded-xl surface-elevated">
-                  <span className="text-sm font-semibold">وضع الصيانة</span>
-                  <div className="w-11 h-6 rounded-full bg-gray-300 dark:bg-gray-600 relative cursor-pointer">
-                    <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 left-[22px] shadow"></div>
-                  </div>
-                </label>
-                <label className="flex items-center justify-between p-3 rounded-xl surface-elevated">
-                  <span className="text-sm font-semibold">السماح بالتسجيل</span>
-                  <div className="w-11 h-6 rounded-full bg-primary relative cursor-pointer">
-                    <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 shadow"></div>
-                  </div>
-                </label>
-              </div>
-            </div>
-
-            <button className="btn-primary w-full"><Save size={16} />حفظ الإعدادات</button>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="card p-5">
+          <div className="mb-4 flex items-center gap-2">
+            <Globe size={18} className="text-primary" />
+            <h2 className="font-bold">الهوية العامة</h2>
           </div>
-          <AdminMobileNav active="settings" />
+
+          <div className="space-y-3">
+            <div>
+              <label className="mb-1 block text-xs font-bold text-muted">اسم المنصة</label>
+              <input className="input-field text-sm" value={form.siteName} onChange={(event) => setForm((current) => ({ ...current, siteName: event.target.value }))} />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-bold text-muted">الوصف</label>
+              <textarea className="input-field min-h-[90px] resize-none text-sm" value={form.siteDescription} onChange={(event) => setForm((current) => ({ ...current, siteDescription: event.target.value }))} />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-bold text-muted">معرف تيليجرام</label>
+              <input className="input-field text-sm" value={form.telegramHandle} onChange={(event) => setForm((current) => ({ ...current, telegramHandle: event.target.value }))} />
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+
+        <div className="card p-5">
+          <div className="mb-4 flex items-center gap-2">
+            <Shield size={18} className="text-success" />
+            <h2 className="font-bold">حالة النظام</h2>
+          </div>
+
+          <div className="space-y-3">
+            <label className="flex items-center justify-between rounded-2xl surface-elevated px-4 py-3">
+              <div>
+                <p className="font-bold">وضع الصيانة</p>
+                <p className="text-xs text-muted">إظهار تنبيه صيانة في الصفحة الرئيسية.</p>
+              </div>
+              <input type="checkbox" checked={form.maintenanceMode} onChange={(event) => setForm((current) => ({ ...current, maintenanceMode: event.target.checked }))} className="h-5 w-5 accent-primary" />
+            </label>
+
+            <label className="flex items-center justify-between rounded-2xl surface-elevated px-4 py-3">
+              <div>
+                <p className="font-bold">السماح بالتسجيل</p>
+                <p className="text-xs text-muted">يظهر في الواجهة العامة كحالة التسجيل.</p>
+              </div>
+              <input type="checkbox" checked={form.allowRegistration} onChange={(event) => setForm((current) => ({ ...current, allowRegistration: event.target.checked }))} className="h-5 w-5 accent-primary" />
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" disabled={isPending} className="btn-primary">
+          <Save size={16} />
+          {isPending ? 'جار الحفظ...' : 'حفظ الإعدادات'}
+        </button>
+      </form>
+    </AdminShell>
   );
 }

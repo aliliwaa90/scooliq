@@ -9,8 +9,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/client"
-import type * as $Enums from "../enums"
-import type * as Prisma from "../internal/prismaNamespace"
+import type * as $Enums from "../enums.ts"
+import type * as Prisma from "../internal/prismaNamespace.ts"
 
 /**
  * Model Handout
@@ -352,33 +352,33 @@ export type HandoutScalarWhereWithAggregatesInput = {
 }
 
 export type HandoutCreateInput = {
-  id: string
+  id?: string
   title: string
   cover: string
   fileUrl: string
   fileSize: string
   type: string
-  downloads: number
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  downloads?: number
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
   subject: Prisma.SubjectCreateNestedOneWithoutHandoutsInput
   grade: Prisma.GradeCreateNestedOneWithoutHandoutsInput
 }
 
 export type HandoutUncheckedCreateInput = {
-  id: string
+  id?: string
   title: string
   cover: string
   fileUrl: string
   fileSize: string
   type: string
-  downloads: number
+  downloads?: number
   subjectId: string
   gradeId: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type HandoutUpdateInput = {
@@ -412,18 +412,18 @@ export type HandoutUncheckedUpdateInput = {
 }
 
 export type HandoutCreateManyInput = {
-  id: string
+  id?: string
   title: string
   cover: string
   fileUrl: string
   fileSize: string
   type: string
-  downloads: number
+  downloads?: number
   subjectId: string
   gradeId: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type HandoutUpdateManyMutationInput = {
@@ -602,31 +602,31 @@ export type HandoutUncheckedUpdateManyWithoutSubjectNestedInput = {
 }
 
 export type HandoutCreateWithoutGradeInput = {
-  id: string
+  id?: string
   title: string
   cover: string
   fileUrl: string
   fileSize: string
   type: string
-  downloads: number
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  downloads?: number
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
   subject: Prisma.SubjectCreateNestedOneWithoutHandoutsInput
 }
 
 export type HandoutUncheckedCreateWithoutGradeInput = {
-  id: string
+  id?: string
   title: string
   cover: string
   fileUrl: string
   fileSize: string
   type: string
-  downloads: number
+  downloads?: number
   subjectId: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type HandoutCreateOrConnectWithoutGradeInput = {
@@ -674,31 +674,31 @@ export type HandoutScalarWhereInput = {
 }
 
 export type HandoutCreateWithoutSubjectInput = {
-  id: string
+  id?: string
   title: string
   cover: string
   fileUrl: string
   fileSize: string
   type: string
-  downloads: number
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  downloads?: number
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
   grade: Prisma.GradeCreateNestedOneWithoutHandoutsInput
 }
 
 export type HandoutUncheckedCreateWithoutSubjectInput = {
-  id: string
+  id?: string
   title: string
   cover: string
   fileUrl: string
   fileSize: string
   type: string
-  downloads: number
+  downloads?: number
   gradeId: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type HandoutCreateOrConnectWithoutSubjectInput = {
@@ -728,17 +728,17 @@ export type HandoutUpdateManyWithWhereWithoutSubjectInput = {
 }
 
 export type HandoutCreateManyGradeInput = {
-  id: string
+  id?: string
   title: string
   cover: string
   fileUrl: string
   fileSize: string
   type: string
-  downloads: number
+  downloads?: number
   subjectId: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type HandoutUpdateWithoutGradeInput = {
@@ -784,17 +784,17 @@ export type HandoutUncheckedUpdateManyWithoutGradeInput = {
 }
 
 export type HandoutCreateManySubjectInput = {
-  id: string
+  id?: string
   title: string
   cover: string
   fileUrl: string
   fileSize: string
   type: string
-  downloads: number
+  downloads?: number
   gradeId: string
-  isFree: boolean
-  isActive: boolean
-  createdAt: Date | string
+  isFree?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
 }
 
 export type HandoutUpdateWithoutSubjectInput = {
